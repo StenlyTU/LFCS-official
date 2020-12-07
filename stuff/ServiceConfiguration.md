@@ -2,19 +2,19 @@
 
 <img src="https://www.flaticon.com/svg/static/icons/svg/263/263074.svg" width="250" align="right"/></a>
 
-1. [Configure a caching DNS server](https://github.com/StenlyTU/lfcs/blob/master/ServiceConfiguration.md#configure-a-caching-dns-server)
-2. [Maintain a DNS zone](https://github.com/StenlyTU/lfcs/blob/master/ServiceConfiguration.md#maintain-a-dns-zone)
-3. [Configure email aliases](https://github.com/StenlyTU/lfcs/blob/master/ServiceConfiguration.md#configure-email-aliases)
-4. [Configure SSH servers and clients](https://github.com/StenlyTU/lfcs/blob/master/ServiceConfiguration.md#configure-ssh-servers-and-clients)
-5. [Restrict access to the HTTP proxy server](https://github.com/StenlyTU/lfcs/blob/master/ServiceConfiguration.md#restrict-access-to-the-http-proxy-server)
-6. [Configure an IMAP and IMAPS service](https://github.com/StenlyTU/lfcs/blob/master/ServiceConfiguration.md#configure-an-imap-and-imaps-service)
-7. [Query and modify the behavior of system services at various operating modes](https://github.com/StenlyTU/lfcs/blob/master/ServiceConfiguration.md#query-and-modify-the-behavior-of-system-services-at-various-operating-modes)
-8. [Configure an HTTP server](https://github.com/StenlyTU/lfcs/blob/master/ServiceConfiguration.md#configure-an-http-server)
-9. [Configure HTTP server log files](https://github.com/StenlyTU/lfcs/blob/master/ServiceConfiguration.md#configure-http-server-log-files)
-10. [Configure a database server](https://github.com/StenlyTU/lfcs/blob/master/ServiceConfiguration.md#configure-a-database-server)
-11. [Restrict access to a web page](https://github.com/StenlyTU/lfcs/blob/master/ServiceConfiguration.md#restrict-access-to-a-web-page)
-12. [Manage and configure containers](https://github.com/StenlyTU/lfcs/blob/master/ServiceConfiguration.md#manage-and-configure-containers)
-13. [Manage and configure Virtual Machines](https://github.com/StenlyTU/lfcs/blob/master/ServiceConfiguration.md#manage-and-configure-virtual-machines)
+1. [Configure a caching DNS server](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/ServiceConfiguration.md#configure-a-caching-dns-server)
+2. [Maintain a DNS zone](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/ServiceConfiguration.md#maintain-a-dns-zone)
+3. [Configure email aliases](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/ServiceConfiguration.md#configure-email-aliases)
+4. [Configure SSH servers and clients](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/ServiceConfiguration.md#configure-ssh-servers-and-clients)
+5. [Restrict access to the HTTP proxy server](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/ServiceConfiguration.md#restrict-access-to-the-http-proxy-server)
+6. [Configure an IMAP and IMAPS service](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/ServiceConfiguration.md#configure-an-imap-and-imaps-service)
+7. [Query and modify the behavior of system services at various operating modes](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/ServiceConfiguration.md#query-and-modify-the-behavior-of-system-services-at-various-operating-modes)
+8. [Configure an HTTP server](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/ServiceConfiguration.md#configure-an-http-server)
+9. [Configure HTTP server log files](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/ServiceConfiguration.md#configure-http-server-log-files)
+10. [Configure a database server](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/ServiceConfiguration.md#configure-a-database-server)
+11. [Restrict access to a web page](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/ServiceConfiguration.md#restrict-access-to-a-web-page)
+12. [Manage and configure containers](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/ServiceConfiguration.md#manage-and-configure-containers)
+13. [Manage and configure Virtual Machines](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/ServiceConfiguration.md#manage-and-configure-virtual-machines)
 
 
 ## Configure a caching DNS server
