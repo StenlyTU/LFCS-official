@@ -2,12 +2,12 @@
 
 <img src="https://image.flaticon.com/icons/png/512/36/36181.png" width="150" align="right"/></a>
 
-1. [Configure networking and hostname resolution statically or dynamically](https://github.com/StenlyTU/lfcs/blob/master/Networking.md#configure-networking-and-hostname-resolution-statically-or-dynamically)
-2. [Configure network services to start automatically at boot](https://github.com/StenlyTU/lfcs/blob/master/Networking.md#configure-network-services-to-start-automatically-at-boot)
-3. [Implement packet filtering](https://github.com/StenlyTU/lfcs/blob/master/Networking.md#implement-packet-filtering)
-4. [Start, stop, and check the status of network services](https://github.com/StenlyTU/lfcs/blob/master/Networking.md#start-stop-and-check-the-status-of-network-services)
-5. [Statically route IP traffic](https://github.com/StenlyTU/lfcs/blob/master/Networking.md#statically-route-ip-traffic)
-6. [Synchronize time using other network peers](https://github.com/StenlyTU/lfcs/blob/master/Networking.md#synchronize-time-using-other-network-peers)
+1. [Configure networking and hostname resolution statically or dynamically](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/Networking.md#configure-networking-and-hostname-resolution-statically-or-dynamically)
+2. [Configure network services to start automatically at boot](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/Networking.md#configure-network-services-to-start-automatically-at-boot)
+3. [Implement packet filtering](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/Networking.md#implement-packet-filtering)
+4. [Start, stop, and check the status of network services](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/Networking.md#start-stop-and-check-the-status-of-network-services)
+5. [Statically route IP traffic](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/Networking.md#statically-route-ip-traffic)
+6. [Synchronize time using other network peers](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/Networking.md#synchronize-time-using-other-network-peers)
 
 
 ## Configure networking and hostname resolution statically or dynamically
