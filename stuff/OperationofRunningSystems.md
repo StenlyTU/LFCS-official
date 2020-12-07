@@ -17,7 +17,7 @@
 12. [Manage the startup process and services (In Services Configuration)](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/OperationofRunningSystems.md#manage-the-startup-process-and-services-in-services-configuration)
 13. [List and identify SELinux/AppArmor file and process contexts](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/OperationofRunningSystems.md#list-and-identify-selinuxapparmor-file-and-process-contexts)
 14. [Manage Software](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/OperationofRunningSystems.md#manage-software)
-15. [Identify the component of a Linux distribution that a file belongs to](https://github.com/StenlyTU/lfcs/blob/main/stuff/OperationofRunningSystems.md#identify-the-component-of-a-linux-distribution-that-a-file-belongs-to)
+15. [Identify the component of a Linux distribution that a file belongs to](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/OperationofRunningSystems.md#identify-the-component-of-a-linux-distribution-that-a-file-belongs-to)
 
 ## Boot, reboot, and shut down a system safely
 
