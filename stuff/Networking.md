@@ -86,7 +86,7 @@ References:
 * Another chain can be used if system is configured as router: *FORWARD*
 * Finally there are other two chains: PREROUTING, POSTROUTING
 
-![inode](Pictures/netfilter.png)
+![inode](https://kali.training/wp-content/uploads/2017/02/001-netfilter-1024x554.png)
 
 * The above picture shows the order in which the various chains are valued. The arrows indicate the route of the packages:
 
