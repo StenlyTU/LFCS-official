@@ -2,18 +2,18 @@
 
 <img src="https://www.svgrepo.com/show/107972/lazy.svg" width="250" align="right"/></a>
 
-1. [Log into local & remote graphical and text mode consoles](https://github.com/StenlyTU/lfcs/blob/master/EssentialCommands.md#log-into-local--remote-graphical-and-text-mode-consoles)
-2. [Search for files](https://github.com/StenlyTU/lfcs/blob/master/EssentialCommands.md#search-for-files)
-3. [Evaluate and compare the basic file system features and options](https://github.com/StenlyTU/lfcs/blob/master/EssentialCommands.md#evaluate-and-compare-the-basic-file-system-features-and-options)
-4. [Compare and manipulate file content](https://github.com/StenlyTU/lfcs/blob/master/EssentialCommands.md#compare-and-manipulate-file-content)
-5. [Use input-output redirection (e.g. >, >>, |, 2>)](https://github.com/StenlyTU/lfcs/blob/master/EssentialCommands.md#use-input-output-redirection-eg----2)
-6. [Analyze text using basic regular expressions](https://github.com/StenlyTU/lfcs/blob/master/EssentialCommands.md#analyze-text-using-basic-regular-expressions)
-7. [Archive, backup, compress, unpack, and uncompress files](https://github.com/StenlyTU/lfcs/blob/master/EssentialCommands.md#archive-backup-compress-unpack-and-uncompress-files)
-8. [Create, delete, copy, and move files and directories](https://github.com/StenlyTU/lfcs/blob/master/EssentialCommands.md#create-delete-copy-and-move-files-and-directories)
-9. [Create and manage hard and soft links](https://github.com/StenlyTU/lfcs/blob/master/EssentialCommands.md#create-and-manage-hard-and-soft-links)
-10. [List, set, and change standard file permissions](https://github.com/StenlyTU/lfcs/blob/master/EssentialCommands.md#list-set-and-change-standard-file-permissions)
-11. [Read, and use system documentation](https://github.com/StenlyTU/lfcs/blob/master/EssentialCommands.md#read-and-use-system-documentation)
-12. [Manage access to the root account](https://github.com/StenlyTU/lfcs/blob/master/EssentialCommands.md#manage-access-to-the-root-account)
+1. [Log into local & remote graphical and text mode consoles](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/EssentialCommands.md#log-into-local--remote-graphical-and-text-mode-consoles)
+2. [Search for files](https://github.com/StenlyTU/lfcs/blob/main/stuff/EssentialCommands.md#search-for-files)
+3. [Evaluate and compare the basic file system features and options](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/EssentialCommands.md#evaluate-and-compare-the-basic-file-system-features-and-options)
+4. [Compare and manipulate file content](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/EssentialCommands.md#compare-and-manipulate-file-content)
+5. [Use input-output redirection (e.g. >, >>, |, 2>)](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/EssentialCommands.md#use-input-output-redirection-eg----2)
+6. [Analyze text using basic regular expressions](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/EssentialCommands.md#analyze-text-using-basic-regular-expressions)
+7. [Archive, backup, compress, unpack, and uncompress files](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/EssentialCommands.md#archive-backup-compress-unpack-and-uncompress-files)
+8. [Create, delete, copy, and move files and directories](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/EssentialCommands.md#create-delete-copy-and-move-files-and-directories)
+9. [Create and manage hard and soft links](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/EssentialCommands.md#create-and-manage-hard-and-soft-links)
+10. [List, set, and change standard file permissions](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/EssentialCommands.md#list-set-and-change-standard-file-permissions)
+11. [Read, and use system documentation](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/EssentialCommands.md#read-and-use-system-documentation)
+12. [Manage access to the root account](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/EssentialCommands.md#manage-access-to-the-root-account)
 
 
 ## Log into local & remote graphical and text mode consoles
