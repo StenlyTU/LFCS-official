@@ -19,7 +19,7 @@
 
 ## Configure a caching DNS server
 
-![DNS Resolution](Pictures/dns_resolution.gif)
+![DNS Resolution](http://web.deu.edu.tr/doc/oreily/networking/dnsbind/figs/dns3_0212.gif)
 
 * Linux DNS server is *bind*
 

@@ -2,25 +2,25 @@
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Storage_icon_of_three_disks.svg/1044px-Storage_icon_of_three_disks.svg.png" width="300" align="right"/></a>
 
-1. [List, create, delete, and modify physical storage partitions](https://github.com/StenlyTU/lfcs/blob/master/StorageManagement.md#list-create-delete-and-modify-physical-storage-partitions)
+1. [List, create, delete, and modify physical storage partitions](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/StorageManagement.md#list-create-delete-and-modify-physical-storage-partitions)
 
-2. [Manage and configure LVM storage](https://github.com/StenlyTU/lfcs/blob/master/StorageManagement.md#manage-and-configure-lvm-storage)
+2. [Manage and configure LVM storage](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/StorageManagement.md#manage-and-configure-lvm-storage)
 
-3. [Create and configure encrypted storage](https://github.com/StenlyTU/lfcs/blob/master/StorageManagement.md#create-and-configure-encrypted-storage)
+3. [Create and configure encrypted storage](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/StorageManagement.md#create-and-configure-encrypted-storage)
 
-4. [Configure systems to mount file systems at or during boot](https://github.com/StenlyTU/lfcs/blob/master/StorageManagement.md#configure-systems-to-mount-file-systems-at-or-during-boot)
+4. [Configure systems to mount file systems at or during boot](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/StorageManagement.md#configure-systems-to-mount-file-systems-at-or-during-boot)
 
-5. [Configure and manage swap space](https://github.com/StenlyTU/lfcs/blob/master/StorageManagement.md#configure-and-manage-swap-space)
+5. [Configure and manage swap space](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/StorageManagement.md#configure-and-manage-swap-space)
 
-6. [Create and manage RAID devices](https://github.com/StenlyTU/lfcs/blob/master/StorageManagement.md#create-and-manage-raid-devices)
+6. [Create and manage RAID devices](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/StorageManagement.md#create-and-manage-raid-devices)
 
-7. [Configure systems to mount file systems on demand](https://github.com/StenlyTU/lfcs/blob/master/StorageManagement.md#configure-systems-to-mount-file-systems-on-demand)
+7. [Configure systems to mount file systems on demand](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/StorageManagement.md#configure-systems-to-mount-file-systems-on-demand)
 
-8. [Create, manage and diagnose advanced file system permissions](https://github.com/StenlyTU/lfcs/blob/master/StorageManagement.md#create-manage-and-diagnose-advanced-file-system-permissions)
+8. [Create, manage and diagnose advanced file system permissions](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/StorageManagement.md#create-manage-and-diagnose-advanced-file-system-permissions)
 
-9. [Setup user and group disk quotas for filesystems](https://github.com/StenlyTU/lfcs/blob/master/StorageManagement.md#setup-user-and-group-disk-quotas-for-filesystems)
+9. [Setup user and group disk quotas for filesystems](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/StorageManagement.md#setup-user-and-group-disk-quotas-for-filesystems)
 
-10. [Create and configure file systems](https://github.com/StenlyTU/lfcs/blob/master/StorageManagement.md#create-and-configure-file-systems)
+10. [Create and configure file systems](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/StorageManagement.md#create-and-configure-file-systems)
 
 ## List, create, delete, and modify physical storage partitions
 
