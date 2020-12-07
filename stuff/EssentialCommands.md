@@ -3,7 +3,7 @@
 <img src="https://www.svgrepo.com/show/107972/lazy.svg" width="250" align="right"/></a>
 
 1. [Log into local & remote graphical and text mode consoles](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/EssentialCommands.md#log-into-local--remote-graphical-and-text-mode-consoles)
-2. [Search for files](https://github.com/StenlyTU/lfcs/blob/main/stuff/EssentialCommands.md#search-for-files)
+2. [Search for files](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/EssentialCommands.md#search-for-files)
 3. [Evaluate and compare the basic file system features and options](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/EssentialCommands.md#evaluate-and-compare-the-basic-file-system-features-and-options)
 4. [Compare and manipulate file content](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/EssentialCommands.md#compare-and-manipulate-file-content)
 5. [Use input-output redirection (e.g. >, >>, |, 2>)](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/EssentialCommands.md#use-input-output-redirection-eg----2)
@@ -500,7 +500,7 @@ You must be able to check results of activities.
 
 ## Create and manage hard and soft links
 
-![inode](Pictures/inode.JPG)
+![inode](http://www.farhadsaberi.com/linux_freebsd/image/unix_file_system.gif)
 
 The i-node (index node) is a data structure in a Unix-style file system that describes a file-system object such as a file or a directory. Each i-node stores the attributes and disk block location(s) of the object's data.
 
