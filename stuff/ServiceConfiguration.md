@@ -82,6 +82,7 @@ References:
 
 * [http://web.deu.edu.tr/doc/oreily/networking/dnsbind/ch02_06.htm](http://web.deu.edu.tr/doc/oreily/networking/dnsbind/ch02_06.htm)
 * [Good Info: https://www.pks.mpg.de/~mueller/docs/suse10.1/suselinux-manual_en/manual/sec.dns.named.html](https://www.pks.mpg.de/~mueller/docs/suse10.1/suselinux-manual_en/manual/sec.dns.named.html)
+* [More Info](https://www.inetdaemon.com/tutorials/internet/dns/operation/hierarchy.shtml)
 
 
 ## Maintain a DNS zone

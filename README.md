@@ -15,8 +15,7 @@
 
 These are notes taken during preparation for [LFCS exam](https://training.linuxfoundation.org/certification/linux-foundation-certified-sysadmin-lfcs/) from `Andrew Mallett` course on [Pluralsight](https://app.pluralsight.com/paths/certificate/linux-foundation-certified-system-admin)
 
-
-These notes contain instructions/commands for ***CentOS*** distribution.
+The notes contain instructions/commands for ***CentOS*** distribution.
 
 These notes cannot be considered as unique source of information to prepare LFCS exam, but can be used as guideline to understand which topics you must be able to manage to pass the exam.
 
