@@ -115,6 +115,7 @@ References:
 * `find . -samefile file` - Find all files that have same i-node of file
 
 * `find . \! -user owner` - It will show all files that aren't owned by user owner. `!` means negation, but must be escaped by \ to  not be interpreted by bash shell
+    * ***-not*** is doing the same
 
 * `find . -iname name` - Search name ignoring case
 
