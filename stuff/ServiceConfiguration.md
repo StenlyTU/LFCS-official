@@ -192,6 +192,18 @@ References:
   Match User <username>
     PasswordAuthentication yes
   ```
+
+* Users and Groups can be allowed or deny using the: **AllowUsers, AllowGroups, DenyUsers, DenyGroups** to `/etc/ssh/sshd_config`
+
+  ```bash
+  AllowUsers ramesh john jason
+  DenyGroups developers qa
+  ```
+
+  * Note: You can use combination of all the Allow and Deny directives. It is
+    processed in this order: DenyUsers, AllowUsers, DenyGroups, and finally
+    AllowGroups
+
 * Bad login attempts are written in `/var/log/secure` 
 
 ***Server management***:
