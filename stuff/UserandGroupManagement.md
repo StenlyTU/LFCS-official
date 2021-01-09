@@ -253,10 +253,39 @@ Refer to `sudo` configuration
   * At the end of man page there is an example to configure login to lock the account after 4 failed logins
   * `man pam_tally2`
 
-* Have a look at `/etc/security` folder. There you can find config files related to PAM.
+* Example from `/etc/pam.d/chsh`
+  ```bash
+  #%PAM-1.0
+  auth       sufficient   pam_rootok.so
+  auth       include      system-auth
+  account    include      system-auth
+  password   include      system-auth
+  session    include      system-auth
+  ```
+  Each configuration line has three fields: a function type, control argument and module.
+  * **Function type** - The function that a user application asks PAM to perform. Here, it’s auth, the task of authenticating the user
+    1. ***auth*** - Authenticate a user (see if the user is who they say they are).
+    2. ***account*** - Check user account status (whether the user is authorized to do something, for example).
+    3. ***session*** - Perform something only for the user’s current session (such as displaying a message of the day).
+    4. ***password*** - Change a user’s password or other credentials.
 
-* `pwscore` -> accept as input password and gives you rating from 0 to 100 how strong is the password.
+  * **Control argument** - This setting controls what PAM does after success or failure of its action for the current line
+    1. ***sufficient*** - If this rule succeeds, the authentication is successful, and PAM does not need to look at any more rules. If the rule fails, PAM proceeds to additional rules.
+    2. ***requisite*** - If this rule succeeds, PAM proceeds to additional rules. If the rule fails, the authentication is unsuccessful, and PAM does not need to look at any more rules.
+    3. ***required***  - If this rule succeeds, PAM proceeds to additional rules. If the rule fails, PAM proceeds to additional rules but will always return an unsuccessful authentication regardless of the end result of the additional rules.
 
-* Time restriction can be configured in `/etc/security/time.conf`
+  * **Module** - The authentication module that runs for this line, determining what the line actually does.
+    * PAM modules can take arguments after the module name.
+    ```bash
+    auth sufficient pam_unix.so nullok
+    ```
+  * The `@include` syntax loads an entire configuration file, but you can also use acontrol argument to load only the configuration for a particular function. 
+  * For more info check `man pam`
 
-* Password complexity policies can be configured in `/etc/security/pwquality.conf`
+* In `/etc/security` you can find config files related to PAM:
+
+    * `pwscore` -> accept as input password and gives you rating from 0 to 100 how strong is the password.
+
+    * Time restriction can be configured in `/etc/security/time.conf`
+
+    * Password complexity policies can be configured in `/etc/security/pwquality.conf`
