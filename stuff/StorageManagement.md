@@ -219,6 +219,12 @@ Automount
 ***NFS protocol***
 
 * `yum -y install nfs-utils` it install software to manage NFS protocol
+  1. `systemctl enable nfs-server --now`
+  2. Shared files are configure in `/etc/exports` like this:
+      ```bash
+      /exports_nfs/docs 192.168.233.0/24(ro,no_subtree_check)
+      ```
+  3. Run the following: `exportfs -rv`
 
 * `showmount -e targetIP`
 
