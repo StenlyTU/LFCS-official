@@ -199,6 +199,8 @@ Automount
 
 * `yum -y install samba-client cifs-utils` it installs software need to manage CIFS/SMB protocol
 
+* Samba configuration file: ` /etc/samba/smb.conf`
+
 * `smbclient -L targetIP`
 
   It lists all SMB shared directory available on a target IP
@@ -240,6 +242,7 @@ Automount
     * `192.168.0.10:/srv/nfs /media/nfs nfs defaults 0 0`
   * To user NFSv3 insert:
     * `192.168.0.10:/srv/nfs /media/nfs nfs defaults,vers=3 0 0`
+* **Note** Use Samba in a mixed environment and NFS whenever cross-platform compatibility is not necessary.
 
 
 ## Configure and manage swap space

@@ -603,6 +603,7 @@ References:
 * `ps auxZ` - show SELinux context of processes
 
 * A SELinux context has the form *user:role:type*
+  * To identify easy the user, role and type look at the last two characters: ...._u:...._r:...._t
 
   * type indicate the type of object
 
@@ -612,7 +613,15 @@ References:
 
 * `restorecon /etc/hosts` -> Restore SELinux Context from Master file
 
+  * The default context(Master file) are stored in `/etc/selinux/targeted/contexts/files/file_contexts`
+
+  * `/etc/selinux/targeted/contexts/files/file_contexts.local` stores contexts to newly created files and directories not found in ***file_contexts***
+
 * `chcon --reference=/path/to/existingfile /path/to/a/newfile` -> How to copy context from file to file.
+
+* `semanage fcontext -a -t samba_share_t /etc/file1` -> Adds the following entry to `/etc/selinux/targeted/contexts/files/file_contexts.local`
+
+  * `restorecon -v /etc/file1` -> Changes the type to ***samba_share_t***
 
 ***Booleans:***
 
@@ -629,6 +638,8 @@ References:
 * References
 
   * [https://en.wikipedia.org/wiki/Mandatory_access_control](https://en.wikipedia.org/wiki/Mandatory_access_control)
+
+  * [https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/security-enhanced_linux/chap-security-enhanced_linux-selinux_contexts](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/security-enhanced_linux/chap-security-enhanced_linux-selinux_contexts)
 
 ## Manage Software
 
