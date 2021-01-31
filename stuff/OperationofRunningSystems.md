@@ -560,7 +560,7 @@ References:
   lrwxrwxrwx. 1 root root 37 Jul 17 14:55 tuned.service -> /usr/lib/systemd/system/tuned.service
   ```
 
-References:
+***References:***
 
 * [https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units](https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units)
 
@@ -584,9 +584,9 @@ References:
 
 * `sestatus` - Show the status of the SELinux
 
-* `setenforce Permissive` set the state to permissive. Only Enforcing or Permissive modes are available.
+* `setenforce Permissive` - set the state to permissive. Only Enforcing or Permissive modes are available.
 
-* `setenforce Enforcing` set the state to enforcing
+* `setenforce Enforcing` - set the state to enforcing
 
 ***Context:***
 
@@ -611,31 +611,45 @@ References:
 
 * `chcon -t unlabeled_t /etc/hosts` -> Change SELinux type of a file
 
+* `chcon --reference=/path/to/existingfile /path/to/a/newfile` -> How to copy context from file to file.
+
 * `restorecon /etc/hosts` -> Restore SELinux Context from Master file
 
-  * The default context(Master file) are stored in `/etc/selinux/targeted/contexts/files/file_contexts`
+  * The default context(Master file) is stored in `/etc/selinux/targeted/contexts/files/file_contexts`
 
-  * `/etc/selinux/targeted/contexts/files/file_contexts.local` stores contexts to newly created files and directories not found in ***file_contexts***
-
-* `chcon --reference=/path/to/existingfile /path/to/a/newfile` -> How to copy context from file to file.
+  * `/etc/selinux/targeted/contexts/files/file_contexts.local` stores contexts to newly created files and directories not found in *file_contexts*
 
 * `semanage fcontext -a -t samba_share_t /etc/file1` -> Adds the following entry to `/etc/selinux/targeted/contexts/files/file_contexts.local`
 
-  * `restorecon -v /etc/file1` -> Changes the type to ***samba_share_t***
+  * `restorecon -v /etc/file1` -> Changes the type to *samba_share_t*
+
+* `semanage fcontext -a -t httpd_sys_content_t "/home/webdir(/.*)?"` -> Change the context type of the dir and all files in it.
 
 ***Booleans:***
 
-* `getsebool -a` || `semanage boolean -l` -> To list all SELinux Booleans
+* `getsebool -a` || `semanage boolean -l` -> To list all SELinux Booleans; semanage give explanation of the bool.
 
-* `setsebool -P httpd_read_user_content on` - To make permanent change into the specific SELinux Boolean
+* `setsebool -P httpd_read_user_content on` - To make permanent change into the specific SELinux Boolean.
 
 ***Ports:***
 
-* `semanage port -l | grep 22` -> Show SELinux Port type
+* `semanage port -l | grep 22` -> Show SELinux Port type.
 
-* `semanage port -a -t ssh_port_t -p tcp 2222` -> Changet it
+* `semanage port -a -t ssh_port_t -p tcp 2222` -> Change it.
 
-* References
+* `semanage port -d 82 -t http_port_t -p tcp` -> Delete it.
+
+***Advanced usage:***
+
+* Install setroubleshoot on *Centos7*: `sudo yum install setools policycoreutils policycoreutils-python`
+
+  * *SELinux Troubleshooter* GUI tool can be used for debugging.
+
+* `semodule -i dovecot_dict.pp` - Install a new module.
+
+* `semodule -R` - Reload the SELinux policy, in order to get the new module into effect.
+
+***References:***
 
   * [https://en.wikipedia.org/wiki/Mandatory_access_control](https://en.wikipedia.org/wiki/Mandatory_access_control)
 

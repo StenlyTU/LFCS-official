@@ -191,6 +191,7 @@ References:
   ...
   Match User <username>
     PasswordAuthentication yes
+    ForceCommand <some-command>
   ```
 
 * Users and Groups can be allowed or deny using the: **AllowUsers, AllowGroups, DenyUsers, DenyGroups** to `/etc/ssh/sshd_config`
@@ -238,7 +239,7 @@ References:
 
 * After that public key is copied on the server, user can use ssh client to login into the server without providing password
 
-* Files `/etc/hosts.allow & denny` files are used for controlling access rules for SSH.
+* Files(TCP Wrappers) `/etc/hosts.allow & denny` are used for controlling access rules for SSH.
 
 ***scp***:
 
