@@ -35,6 +35,8 @@
 
 ***Systemd:***
 
+![SystemD Ecosystem](https://www.linux.com/images/stories/41373/Systemd-components.png)
+
 * Previous versions of Red Hat Enterprise Linux, which were distributed with SysV init or Upstart, implemented a predefined set of runlevels that represented specific modes of operation. These runlevels were numbered from 0 to 6 and were defined by a selection of system services to be run when a particular runlevel was enabled by the system administrator. In CentOS and Red Hat Enterprise Linux 7, the concept of runlevels has been replaced with systemd targets.
 
 * Systemd targets are represented by target units. Target units end with the .target file extension and their only purpose is to group together other systemd units through a chain of dependencies. 
@@ -259,7 +261,7 @@ References:
 
 ***Audit Root Access:***
 
-- `/var/log/secure` -> Hold audit information such as: failed login attempts.
+- `/var/log/secure` -> Hold audit information such as: failed login attempts. On Ubuntu - `/var/log/auth.log`
 
 - `grep sudo /var/log/secure` -> Give info when sudo is used.
 
