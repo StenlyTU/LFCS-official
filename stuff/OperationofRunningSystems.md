@@ -281,15 +281,20 @@ References:
   - We have logrotate script in */etc/cron.daily* directory.
 
 ***Journalctl logs:***
+
   * `journalctl` -> Opens file system's journal. By default it kept in memory. It's going to be truncated when becomes too big. 
 
   * `journalctl _PID=1` -> Search for logs related to the PID number 1
 
+  * `journalctl _UID=33 --since today` -> Show the logs for specific user.
+
+  * `journalctl --dmesg` -> Show the kernel logs.
+
+  * `journalctl --since "10 minutes ago"` -> Show journal information for the last 10 minutes.
+
   * `mkdir -p /var/log/journal` - *journalctl* is not persistent. To make it persistent we need to create directory *journal* in */var/log* dir. After creation of this directory, we will have directory created in journal dir.
 
   - There is also configuration file behind of this, which located in **/etc/system/journald.conf**. Here you can specify configuration for your journal. Size, what to store, storage behaviour and so on.
-
-  * `journalctl --since "10 minutes ago"` -> Show journal information for the last 10 minutes.
 
 References:
 
