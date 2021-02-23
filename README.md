@@ -32,3 +32,9 @@ These notes cannot be considered as unique source of information to prepare LFCS
 [Service Configuration - 20%](stuff/ServiceConfiguration.md)
 
 [Storage Management - 13%](stuff/StorageManagement.md)
+
+##  Other repos  ##
+
+* Interactive ***K8s*** training with exercises - https://github.com/StenlyTU/K8s-training-official
+
+* Linux Foundation ***LFCE*** knowledge base - coming soon
