@@ -38,3 +38,5 @@ These notes cannot be considered as unique source of information to prepare LFCS
 * Interactive ***K8s*** training with exercises - https://github.com/StenlyTU/K8s-training-official
 
 * Linux Foundation ***LFCE*** knowledge base - coming soon
+
+:checkered_flag: If you liked the repo please star it :star:
