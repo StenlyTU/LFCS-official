@@ -68,7 +68,7 @@ First column shows  which user is logged into system and the second one to which
 * For Virtual Console in terminal is showed tty1, tty2 etc.
 
 * For ssh remote sessions (pseudo-terminal) in terminal is showed pts/0, pts/1 etc.
-* :0 is for X11server namely used for graphical login
+* :0 is for X11 server namely used for graphical login
 
 References:
 * [https://askubuntu.com/questions/506510/what-is-the-difference-between-terminal-console-shell-and-command-line](https://askubuntu.com/questions/506510/what-is-the-difference-between-terminal-console-shell-and-command-line)
@@ -82,7 +82,7 @@ References:
 
 ## Search for files
 
-* `find` is recursive without parameters
+* `find` is recursive ***without*** parameters
 
 * Base syntax: find PATH PARAMETERS
 
@@ -96,7 +96,7 @@ References:
 
   The exec's command must be contained between `-exec` and `\;`. 
 
-  ; is treated as end of command character in bash shell. For this I must escape it with \\. If escaped it will be interpreted by find and not by bash shell.
+  `;` is treated as end of command character in bash shell. For this I must escape it with \\. If escaped it will be interpreted by find and not by bash shell.
 
 * Some parameter accepts value n with + or - in front. The meaning is:
 
@@ -106,7 +106,7 @@ References:
 
 * `find /etc -size -100k` -  Search in /etc all files/directories with size less of 100 kilobytes
 
-* `find . -maxdepth 3 -type f -size +2M` -Search starting from current position, descending maximum three directories levels, files with size major of 2 megabyte
+* `find . -maxdepth 3 -type f -size +2M` - Search starting from current position, descending maximum three directories levels, files with size major of 2 megabyte
 
 * `find . \( -name name1 -o -name name2 \)`
 
@@ -217,12 +217,12 @@ References:
 
 * `cat file`Print file content
 * `tail file` Print last 10 file lines
-  * `tail -n 5` file Print last 5 file lines
+  * `tail -n 5 file` Print last 5 file lines
   * `tail -f file` Print last 10 file lines and append. Useful to monitor log files
 * `head file` Print first 10 file lines
   * `head -n 2 file` Print first 2 file lines
 
-* `tr SET1 SET2` translate set of characters one to set of characters 2
+* `tr SET1 SET2` translate set of characters one to set of characters two
 
   * `cat file | tr test sub` - It will replace all occurrences of test with sub
 
@@ -337,7 +337,7 @@ Regular Expressions
 
 * Not all regular expressions are supported by `grep`. As alternative can be used `egrep`
 
-* sed - Without -i the results of file alteration won't be permanent
+* sed - Without `-i` the results of file alteration won't be permanent
 
   * `sed 's/source/target/' file`
 
@@ -367,10 +367,6 @@ Regular Expressions
 
   * `sed -n 's/source/target/p'` - In any row of file, it will change first occurrence of source to target. Print only changed rows
 
-  * `sed -n '/source/p' file`  - It will print only rows that contain source. It is equal to grep source file
-
-  * `sed -n 2,4p file` - It prints rows from 2 to 4
-
   * `sed '/source/d' file` - Delete rows with source
 
   * `sed -n 12d file` - Delete row 12
@@ -394,17 +390,19 @@ References:
 
 * `tar` Save many files into a single file
 
+  `tar` uses `gzip`, `bzip2` and `xz` compression. `Gzip` is fast and more common, but it generally compresses a bit less. `Bzip2` is slower, but it compresses a bit more. `XZ` is the newest.
+
   File permissions are maintained by default only for file users. For other user I must explicit say to maintain permission during decompression using `-p` parameter
 
   * `tar jcfv file.tar.bz2 *` - Save all files of current directory in new bzip2 compressed file called file.tar.bz2
 
   * `tar jxfv file.tar.bz2` - Extract content of file.tar.bz2
 
-  * `tar tf file.tar` - Show content of file.tar. **Note**: the file.tar isn't compressed
+  * `tar tf file.tar` - Show content of file.tar. **Note**: file.tar isn't compressed
 
-  * `tar --delete -f test.tar file` - Delete file from test.tar. **Note**: the test.tar isn't compressed
+  * `tar --delete -f test.tar file` - Delete file from test.tar. **Note**: test.tar isn't compressed
 
-  * `tar --update -f test.tar file` - Update file in test.tar. **Note**: the test.tar isn't compressed
+  * `tar --update -f test.tar file` - Update file in test.tar. **Note**: test.tar isn't compressed
 
   * `tar X<(command that generate list) -c -f file.tar *`
 
@@ -412,13 +410,13 @@ References:
 
     Exclude file MPEG from content of file.tar
 
+  * `--same-permissions` - Keep the permissions.
 
+  * `--acls` - preserve the ACL of the files.
 
 * Backup a device
 
-  Device must be unmounted
-
-  `dd if=/dev/sda of=/system_images/sda.img`
+  `dd if=/dev/sda of=/system_images/sda.img` - Device must be unmounted
 
 * Restore device
 
@@ -451,7 +449,7 @@ You must be able to check results of activities.
 
   * `ls -l` long output. It will print more columns 
 
-    File Type+Permissions - Number of links - Owner - Group - Dimension - Creation date - Creation hour - Name
+    File Type+Permissions - Number of links - Owner - Group - Size - Creation date - Creation hour - Name
 
     First letter of first column indicate file type:
 
@@ -641,7 +639,9 @@ References:
 
   * `man -k keyword` - Search a manual for provided keywork
 
-    * `sudo mandb` Create database used by `man -k` command
+     * `sudo mandb` Create database used by `man -k` command
+
+  * `man -f printf` - Show man sections for the command. Doing the same as whatis.
 
 * `/usr/share/doc` - It contains configuration files examples
 
@@ -668,7 +668,7 @@ References:
 
 * `sudo -i` - ??? root login
 
-* `sudo -l` - This will list all of the rules in the /etc/sudoers file that apply to your user. This gives you a good idea of what you will or will not be allowed to do with sudo as any user.
+* `sudo -l` - This will list all of the rules in the `/etc/sudoers` file that apply to your user. This gives you a good idea of what you will or will not be allowed to do with sudo as any user.
 
 * `sudo` command to allow an ordinary user to execute commands as a different user
   (usually the superuser)
@@ -694,7 +694,7 @@ References:
   - demo ALL=(ALL:ALL)      ***ALL***
     ​           The last "ALL" indicates these rules apply to all commands.
 
-  Whit this row inserted in sudo configuration, demo user can execute this command:
+  With this row inserted in sudo configuration, demo user can execute this command:
 
   `sudo -u user command`
 
