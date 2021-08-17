@@ -450,4 +450,4 @@ Automount NFS directory
 
 * `umount /data/ext4` -> Unmount the partition.
 
-[Back to top of the page: ⬆️](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/StorageManagement.md#manage-and-configure-lvm-storage#storage-management)
+[Back to top of the page: ⬆️](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/StorageManagement.md#storage-management)
