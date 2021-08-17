@@ -287,4 +287,4 @@ References:
 
 Both NTP and CHRONYD are using port ***123***. CHRONYD is working also on port **323**.
 
-[Back to top of the page: ⬆️](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/Networking.md#-networking)
+[Back to top of the page: ⬆️](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/Networking.md#networking)

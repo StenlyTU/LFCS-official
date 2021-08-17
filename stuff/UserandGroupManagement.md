@@ -290,4 +290,4 @@ Refer to `sudo` configuration
 
     * Password complexity policies can be configured in `/etc/security/pwquality.conf`
 
-[Back to top of the page: ⬆️](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/UserandGroupManagement.md#-User-and-Group-Management)
+[Back to top of the page: ⬆️](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/UserandGroupManagement.md#user-and-group-management)

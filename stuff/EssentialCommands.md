@@ -746,4 +746,4 @@ References:
     gacanepa ALL=NOPASSWD:/bin/updatedb
     ```
 
-[Back to top of the page: ⬆️](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/EssentialCommands.md#-Essential-Commands)
+[Back to top of the page: ⬆️](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/EssentialCommands.md#essential-commands)
