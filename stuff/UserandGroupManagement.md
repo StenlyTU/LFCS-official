@@ -289,3 +289,5 @@ Refer to `sudo` configuration
     * Time restriction can be configured in `/etc/security/time.conf`
 
     * Password complexity policies can be configured in `/etc/security/pwquality.conf`
+
+[Back to top of the page: ⬆️](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/UserandGroupManagement.md#-User-and-Group-Management)

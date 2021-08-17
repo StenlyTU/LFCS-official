@@ -47,10 +47,13 @@
 
 ## Manage and configure LVM storage
 
-* Before create a Logical Volume must be created in sequence a physical volume and after a volume group
-* A physical volume is a partition that can be part of volume group. Inside a volume group can be created logical volume
-* The advance of logical volume is that their dimension can be managed easly
-* If more space is need a volume group can be extended as well
+* Before creating a Logical Volume you first need to created a physical volume and after that a volume group.
+
+* A physical volume is a partition that can be part of volume group. Inside a volume group can be created logical volume.
+
+* The advantage of logical volume is that their size can be managed easly.
+
+* If more space is needed a volume group can be extended as well.
 
 Physical Volume
 
@@ -58,9 +61,9 @@ Physical Volume
 
   To create a physical volume with partition sbd1
 
-* `pvs` lists available physical volumes
+* `pvs` -> Lists available physical volumes
 
-* `pvdisplay /dev/sdb1` shows info of a physical volume
+* `pvdisplay /dev/sdb1` -> Shows info of a physical volume
 
 Volume Group
 
@@ -68,11 +71,11 @@ Volume Group
 
   To create a volume group called *vgname* and add the sdb1 physical volume to it
 
-* `vgs` lists available volume groups
+* `vgs` -> Lists available volume groups
 
-* `vgdisplay vgname` shows info of a volume group
+* `vgdisplay vgname` -> Shows info of a volume group
 
-* `vgextend vgname /dev/sdc3` extends a volume group adding a new physical volume `/dev/sdc3`
+* `vgextend vgname /dev/sdc3` -> Extends a volume group adding a new physical volume `/dev/sdc3`
 
 * `vgreduce vgname /dev/sdc3` -> Remove physical volume from a volume group
 
@@ -86,39 +89,39 @@ Logical volume
 
   To create a logical volume called *volumename*  with all available space on volume group *vgname*
 
-* `lvs` list available logical volumes
+* `lvs` -> List available logical volumes
 
-* `lvdisplay` shows info of all logical volumes
+* `lvdisplay` -> Shows info of all logical volumes
 
-* `lvdisplay vgname/volumename` shows info of a logical volume *volumename* contained in *vgname* volume group
+* `lvdisplay vgname/volumename` -> Shows info of a logical volume *volumename* contained in *vgname* volume group
 
-* Before use a logical volume, a file system must be created on it with: `mkfs -t ext4 /dev/vgname/volumename`
+* Before using a logical volume, file system must be created on it with: `mkfs -t ext4 /dev/vgname/volumename`
 
 * Add entry to `/etc/fstab`
   * `blkid /dev/vgname/volumename ` shows the UUID of a formatted volume group
   * You can use: `/dev/mapper/vgname-volumename` or `/dev/vgname/volumename` it's the same.
 
-* `lvextend -L +1G -r vgname/volumename ` extends the logical volume *volumename* of one giga and resize
+* `lvextend -L +1G -r vgname/volumename ` -> Extends the logical volume *volumename* of one giga and resize
 
   * `-r`  is used to resize file system
   * For xfs use `xfs_growfs /lvm` to resize the filesystem. 
   * To resize ExtN use -r or `resize2fs /dev/vgname/volumename`.
 
-* `lvreduce -L -1G -r vgname/volumename ` reduce the logical volume *volumename* of one giga and resize
+* `lvreduce -L -1G -r vgname/volumename ` -> Reduce the logical volume *volumename* of one giga and resize
 
 * `lvcreate -L 30M -s -n backup /dev/vgname/volumename` -> Create LVM Snapshot
 
 ## Create and configure encrypted storage
 
 * To use encrypted storage a kernel module must be loaded
-  * `sudo modprobe dm_crypt` Loads kernel module dm_crypt
-  * `echo dm_crypt >> /etc/modules-load.d/dm_crypt.conf` to load dm_crypt module automatically when system will be restarted
-  * `lsmod` lists all loaded kernel modules
-* `yum -y install cryptsetup` install software used to manage encrypted storage
+  * `sudo modprobe dm_crypt` -> Loads kernel module dm_crypt
+  * `echo dm_crypt >> /etc/modules-load.d/dm_crypt.conf` -> Load dm_crypt module automatically when system will be restarted
+  * `lsmod` -> Lists all loaded kernel modules
+* `yum -y install cryptsetup` -> Install software used to manage encrypted storage
 
 Encrypt
 
-* `cryptsetup luksFormat /dev/vgname/volumename` encrypts a logical volume *volumename* contained in *vgname* volume group
+* `cryptsetup luksFormat /dev/vgname/volumename` -> Encrypts a logical volume *volumename* contained in *vgname* volume group
 
   * A password must be provided
   * When confirmation will be required insert a capital <u>YES</u>
@@ -146,10 +149,10 @@ Close device
 
 Automount
 
-* `echo "passwd" >> /root/key` Insert a string that will be used that will be used as authentication key to open device
+* `echo "passwd" >> /root/key` -> Insert a string that will be used that will be used as authentication key to open device
 
-* `chmod 400 /root/key` reduces permission on key file
-* `cryptsetup luksAddKey /dev/mapper/namenewdevice /root/key` add key to encrypted device called *namenewdevice*
+* `chmod 400 /root/key` -> Reduces permission on key file
+* `cryptsetup luksAddKey /dev/mapper/namenewdevice /root/key` -> Add key to encrypted device called *namenewdevice*
 * Edit `/etc/crypttab` and add below row:
   * `namenewdevice /dev/vgname/volumename /root/key`
 
@@ -175,9 +178,9 @@ Automount
       * First 0 means no backup required
       * Second 0 means no fsck required in case of not correct umount. To enable fsck insert 2 because number indicate the check order, and 1 is given to operating system disk and two do data disks
 
-* `mount` shows mounted volumes
+* `mount` -> Shows mounted volumes
 
-* `mount -a` reloads /etc/fstab
+* `mount -a` -> Reloads /etc/fstab
 
 * `mount -t type  -o options device dir`
 
@@ -263,10 +266,10 @@ Automount
 Concepts:
 
 * Parity disk. It is used to provide fault tolerance. 
-* The spare device. It not take part of RAID and it is used only in case of a disk fault. In this case spare enter in the RAID and the content of lost disk is reconstructed and saved on it.
+* The spare device. It doesn't take part of the RAID and it is used only in case of a disk fault. In this case spare enter in the RAID and the content of lost disk is reconstructed and saved on it.
 
 
-* `yum -y install mdadm` installs software to manage RAID devices
+* `yum -y install mdadm` -> Installs software to manage RAID devices
 * RAID 0 - Striped - No spare
 
   * `mdadm --create --verbose /dev/md0 --level=stripe --raid-devices=2 /dev/sdb1 /dev/sdc1`
@@ -285,7 +288,7 @@ Concepts:
 
   * `mdadm --create --verbose /dev/md0 --level=10 --raid-devices=4 /dev/sd[b-e]1 --spare-devices=1 /dev/sdf1`  
 
-* `mdadm --detail /dev/md0` shows status of RAID device
+* `mdadm --detail /dev/md0` -> Shows status of RAID device
 * To use device md0, format it and use as a classical device
 
 * `cat /proc/mdstat` -> Give general info.
@@ -313,13 +316,13 @@ Monitoring RAID devices
   
   `mdadm --grow /dev/md0 --raid-devices=2`
 
-  It mark disk as failed and remove it. After the size of array must be adjusted
+  It mark disk as failed and remove it. After that the size of array must be adjusted.
 
 ***Delete RAID:***
 
 * Unmount device
 * `mdadm --stop /dev/md0`
-* `mdadm --zero-superblock /dev/sbc2` It clean partition that, after, can be reused
+* `mdadm --zero-superblock /dev/sbc2` -> It cleans the partition that can be resused later.
 
 References:
 
@@ -344,7 +347,7 @@ Automount NFS directory
 
 ## Create, manage and diagnose advanced file system permissions
 
-**ACL Access control list** 
+**ACL - Access control list** 
 
 * They must be supported by the filesystem or build-in into the kernel. Check the kernel with the follwoing: `grep ACL /boot/confif-$(uname -r)`
 
@@ -378,13 +381,15 @@ Automount NFS directory
 
 **Extended attributes**
 
-* They are file properties
-* With some old filesystem a mount option (e.g. *user_xattr*) must be provided to enable extended attributes
+* Extended attributes are file properties.
+* With some old filesystem a mount option (e.g. *user_xattr*) must be provided to enable extended attributes.
 
-* Only root user can remove an attribute
-* `chattr +i file` add *immutable* attribute to a file. It cannot be deleted or removed
-* `chattr -i file` remove *immutable* attribute from a file.
-*  `lsattr file` shows file's extended attributes
+* Only root user can remove an attribute!
+* `chattr +i file` -> Add *immutable* attribute to a file. It cannot be deleted or removed
+* `chattr -i file` -> Remove *immutable* attribute from a file.
+* `chattr -a file` -> The file can only be opened in append mode for writing.
+* `chattr -a file` -> When a file with this attribute set is open, its atime(last time the file was accessed/opened) record is not changed.
+* `lsattr file` shows file's extended attributes
 
 
 ## Setup user and group disk quotas for filesystems
@@ -399,20 +404,20 @@ Automount NFS directory
   * Two files will be created:
     * aquota.group
     * aquota.user
-* `quotaon -a` start quota system
+* `quotaon -a` -> Start quota system
   * Alternative:
-  * `quotaon -vu /mnt/mountpoint` it starts only quota user for specific mountpoint
-  * `quotaon -vg /mnt/mountpoint` it starts only quota group for specific mountpoint
+  * `quotaon -vu /mnt/mountpoint` -> It starts only quota user for specific mountpoint
+  * `quotaon -vg /mnt/mountpoint` -> It starts only quota group for specific mountpoint
 * `quota -vu user` shows user's quota
-* The quota is specified in blocks of 1K size and in number of inode that is the number of files that can be created
+* The quota is specified in blocks of 1K size and in number of inode that is the number of files that can be created.
 * Hard limit: maxim value allowed
-* Soft limit: a limit that can be exceeded for a *grace period*. Default *grace period* is a week
-* When grace period is reached, soft limit become and hard limit
-* `edquota -t` Edit the grace period. Is an unique value for all system
-* `edquota -u user` edit user's quota
+* Soft limit: a limit that can be exceeded for a *grace period*. Default *grace period* is one week.
+* When grace period is reached, soft limit become and hard limit.
+* `edquota -t` -> Edit the grace period. Is an unique value for the whole system.
+* `edquota -u user` -> Edit user's quota.
   * In each column can be insert a value for soft and hard limit for blocks and inode
   * **NOTE**: Normally soft and hard limits are configured equal to avoid confusion 
-* `repquota -aug` - It shows an overview of current quota for each users
+* `repquota -aug` -> It shows an overview of current quota for each users
 
 * Soft limit=900 and the hard limit=1000 blocks (**1024 bytes/block * 1000 blocks = 1024000 bytes = 1 MB**) of disk space usage.
 
@@ -444,3 +449,5 @@ Automount NFS directory
 * `mount -o remount,noexec /dev/sdb1 /data/ext4` -> Add new mount option - *noexec*.
 
 * `umount /data/ext4` -> Unmount the partition.
+
+[Back to top of the page: ⬆️](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/StorageManagement.md#manage-and-configure-lvm-storage#_Storage_Management)

@@ -398,6 +398,10 @@ References:
 
   * `tar jxfv file.tar.bz2` - Extract content of file.tar.bz2
 
+  * `tar cvJf file.tar.xz *` - Create xz file. 
+
+  * `tar czvf file.tar.gz *` - Create gzip file.
+
   * `tar tf file.tar` - Show content of file.tar. **Note**: file.tar isn't compressed
 
   * `tar --delete -f test.tar file` - Delete file from test.tar. **Note**: test.tar isn't compressed
@@ -525,7 +529,7 @@ Each i-nodes is identified by a unique i-node numbers
 
 * It's a pointer to a filename
 * This means that there will by this chain: link -> filename -> i-node
-  * If filename will be removed, link will become invalid
+  * If filename is removed, link will become invalid
 
 * Note: permissions on a link are "open", because real permission are associate to i-node
 
@@ -598,7 +602,7 @@ Relative mode:
 
 **Advanced permissions**
 
-There are other special permissions that can be granted to file/dirctories
+There are other special permissions that can be granted to file/directories
 
 |                |         File         |                          Directory                          |
 | :------------: | :------------------: | :---------------------------------------------------------: |
@@ -710,7 +714,7 @@ References:
 
   This means that root direct login (with user and password) could be disabled and root session will be opened using only `sudo`. Some Linux distribution use this method as default configuration (e.g Ubuntu).
 
-  The advance is that root password is not shared if I need to add a new system administrator.
+  The advantage of this approach is that root password is not shared if I need to add a new system administrator.
 
 * In sudo configuration `%` indicate group
 
@@ -741,3 +745,5 @@ References:
     ```
     gacanepa ALL=NOPASSWD:/bin/updatedb
     ```
+
+[Back to top of the page: ⬆️](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/EssentialCommands.md#-Essential-Commands)

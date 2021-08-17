@@ -459,13 +459,13 @@ References:
 
   * **NOTE**: This is a runtime change, not permanent
 
-  * **NOTE**: With this files `vi` cannot be used
+  * **NOTE**: With these files `vi` cannot be used
 
 * Alternative method: `sysctl -w net.ipv6.conf.all.disable_ipv6=1`
 
 * `sysctl -a` - shows all parameters that can be configured
 
-To make configuration permanent
+**To make configuration permanent:**
 
 * `cd /etc/sysctl.d`
 * `echo net.ipv6.conf.all.disable_ipv61=1 > ipv6.conf`
@@ -473,15 +473,15 @@ To make configuration permanent
   * **NOTE**: it is better to use: `/etc/sysctl.d/99-sysctl.conf` link to `/etc/sysctl.conf`
 * `sysctl -p` reload permanent configuration. Alternative: reboot system
 
-Some parameters changed commonly:
+**Some parameters changed often:**
 
   * net.ipv4.ip_forward=0 disable packet forwarding
 
-  * fs.file-max -> massimo numero di file gestibili
+  * fs.file-max -> maximum number of open files
 
-  * kernel.sysrq -> abilita printscreen key
+  * kernel.sysrq -> It is a ‘magical’ key combo you can hit which the kernel will respond to regardless of whatever else it is doing, unless it is completely locked up.
 
-  * net.ipv4.icmp_echo_ignore_all -> ignora ping
+  * net.ipv4.icmp_echo_ignore_all -> ignore ping
 
 
 ## Use scripting to automate system maintenance tasks
@@ -581,8 +581,8 @@ References:
   * *enforcing*: Actions contrary to the policy are blocked and a corresponding event is logged in the audit log
   * *permissive*: Actions contrary to the policy are only logged in the audit log: `/var/log/audit/audit.log`
   * *disabled*: The SELinux is disabled entirely
-  * The status can be configured in file `/etc/sysconfig/selinux` which is symlink to `/etc/selinux/config`. Changes to this file will be read only after reboot
-  * When state is set to *enforcing* can be switched to *permissive* and vice versa without reboot system.
+  * The status can be configured in file `/etc/sysconfig/selinux` which is symlink to `/etc/selinux/config`. Changes to this file will be read only after reboot.
+  * The state can be changed from *enforcing* to *permissive* and vice versa without system reboot.
   * When the state is set to disable the only way to re-enable SELinux is to change `/etc/sysconfig/selinux` and reboot.
   * In case if you want to disable SELinux. Change SELINUX=enforcing to SELINUX=disabled and reboot. But you don't want to do that, system need to be secured.
 
@@ -614,9 +614,9 @@ References:
 
   * type indicate the type of object
 
-  * `unconfined_t` are object not limited by SELinux
+  * `unconfined_t` are object not limited by SELinux.
 
-* `chcon -t unlabeled_t /etc/hosts` -> Change SELinux type of a file
+* `chcon -t unlabeled_t /etc/hosts` -> Change SELinux type of a file.
 
 * `chcon --reference=/path/to/existingfile /path/to/a/newfile` -> How to copy context from file to file.
 
@@ -670,25 +670,25 @@ References:
 
 * `yum search keyword`
 
-  This  is  used  to  find  packages when you know something about the package but aren't sure of it's name. By default search will try searching just package names and summaries, but if that "fails" it will  then  try  descriptions  and url.
+  This  is  used  to  find  packages when you know something about the package but aren't sure of it's name. By default search will try searching just package names and summaries, but if that "fails" it will  then  try  descriptions  and URLs.
 
 * *Repository*: collections of software packages used by yum. They are configured in `/etc/yum.repos.d`
 
 * *Yum* downloads the RPM packages into its cache folder: `/var/cache/yum...` Use `tree` after that.
 
-* `yum info package` Information on package
+* `yum info package` -> Information on package
 
   * If package is installed Repo will be equal to "installed"
 
-* `yum install package` Install package
+* `yum install package` -> Install package
 
-* `yum provides */file` Search package that contain file
+* `yum provides */file` -> Search package that contain file
 
-* `yum remove package` Remove package
+* `yum remove package` -> Remove package
 
-* `yum autoremove package` Remove package plus unused dependencies
+* `yum autoremove package` -> Remove package plus unused dependencies
 
-* `yumdownloader package` Download the RPM package
+* `yumdownloader package` -> Download the RPM package
 
   * **NOTE**: require `yum -y install yum-utils`
 
@@ -698,18 +698,18 @@ References:
 
 ***RPM***
 
-* `rpm -i file.rpm` Install file.rpm
-* `rpm -U file.rpm` Upgrade file.rpm
-* `rpm -qa` List all installed RPM
-* `rpm -qf file` Tells to what RPM package file belong
-* `rpm -e <package-name>` Erase the installed package.
-* `rpm -V <package-name>` Verify integrity of package.
+* `rpm -i file.rpm` -> Install file.rpm
+* `rpm -U file.rpm` -> Upgrade file.rpm
+* `rpm -qa` -> List all installed RPM
+* `rpm -qf file` -> Tells to what RPM package file belong
+* `rpm -e <package-name>` -> Erase the installed package.
+* `rpm -V <package-name>` -> Verify integrity of package.
 
 ## Identify the component of a Linux distribution that a file belongs to
 
-* `yum provides */file` Search package that contain file
+* `yum provides */file` -> Search package that contain file
 
-* `ldd path/command` Show all libraries used by command
+* `ldd /path/command` -> Show all libraries used by command
 
 * This info is contained in a library cache
 
@@ -720,3 +720,5 @@ References:
 * The info for cache are in /etc/ld.so.cache.d/
 
 * The cache is normally re-build each time a new package is installed
+
+[Back to top of the page: ⬆️](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/OperationofRunningSystems.md#-Operation-of-Running-Systems)

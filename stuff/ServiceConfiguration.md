@@ -56,25 +56,25 @@
   };
   ```
 
-  * `listen-on port 53` tell on which network interfaces and port to accept client queries.
+  * `listen-on port 53` -> tell on which network interfaces and port to accept client queries.
 
-  * `allow-query` defines the networks from which clients can post DNS requests.
+  * `allow-query` -> defines the networks from which clients can post DNS requests.
   
-  * `allow-query-cache` defines the addresses/networks from which clients are allowed to issue queries that access the local cache.
+  * `allow-query-cache` -> defines the addresses/networks from which clients are allowed to issue queries that access the local cache.
 
-  * `forwarders` specifies the name servers to which DNS requests should be forwarded if they cannot be resolved directly. 
+  * `forwarders` -> specifies the name servers to which DNS requests should be forwarded if they cannot be resolved directly. 
 
-  * `zone` contains domain configuration. After `zone`, specify the name of the domain to administer.
+  * `zone` -> contains domain configuration. After `zone`, specify the name of the domain to administer.
 
-    * `file` specifies the file where zone data for the domain is located.
+    * `file` -> specifies the file where zone data for the domain is located.
 
-  * `zone "0.168.192.in-addr.arpa"` is the configuration for reverse zone or reverse lookup. A reverse zone allows DNS to convert from an address to a name.
+  * `zone "0.168.192.in-addr.arpa"` -> is the configuration for reverse zone or reverse lookup. A reverse zone allows DNS to convert from an address to a name.
 
-    * `0.168.192` must be substituted with the first three octets of whatever network addresses range are managed
+    * `0.168.192` -> must be substituted with the first three octets of whatever network addresses range are managed
 
 * Before restarting the service check the config: `named-checkconf -z /etc/named.conf`
 
-* `systemctl restart named` Restart bind server
+* `systemctl restart named` -> Restart bind server
 
 * Test it: `dig pluralsight.com @127.0.0.1`
 
@@ -243,9 +243,9 @@ References:
 
 ***scp***:
 
-* Secure copy. It use ssh to copy file on a server
-* `scp /test/source 123.123.123.123:/dest` It will copy local file /test/source in /dest directory on the server 123.123.123.123
-* `scp 123.123.123.123:/source /dest` It will copy source file from server to local directory dest
+* Secure copy. It uses ssh to copy file on a server.
+* `scp /test/source 123.123.123.123:/dest` -> It will copy local file /test/source in /dest directory on the server 123.123.123.123
+* `scp 123.123.123.123:/source /dest` -> It will copy source file from server to local directory dest
 
 
 ## Restrict access to the HTTP proxy server
@@ -557,3 +557,5 @@ Manage Virtual Machines
 References:
 
 * [https://www.ibm.com/support/knowledgecenter/en/linuxonibm/com.ibm.linux.z.ldva/ldva_t_modifyingCPUNumber.html](https://www.ibm.com/support/knowledgecenter/en/linuxonibm/com.ibm.linux.z.ldva/ldva_t_modifyingCPUNumber.html)
+
+[Back to top of the page: ⬆️](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/ServiceConfiguration.md#-service-configuration)

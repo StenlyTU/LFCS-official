@@ -107,6 +107,8 @@ References:
 
 * `firewalld` is a service that use iptables to manage firewalls rules
 
+  * Starting `firewalld` service will automatically stop `iptables` service.
+
 * `firewall-cmd` is the command to manage firewalld
 
 ***Firewalld:***
@@ -198,7 +200,7 @@ References:
 
 * `iptables -D INPUT 2` -> Delete the second rule in INPUT chain.
 
-* **NOTE:** Remember to use only one service to configure the Linux firewall. Do not mix ufw, firewalld, and iptables config files and frontends.
+* **NOTE:** Remember to use only one service to configure the Linux firewall. Do not mix `ufw`, `firewalld`, and `iptables` config files and frontends.
 
 * **NOTE:** The file `/etc/services` contains a list of well know ports with services name
 
@@ -212,7 +214,7 @@ References:
 * Network services are controlled as other daemon with `systemctl` command
   * `systemctl status servicename`
 
-* With `netstat` is it possible list internet port opened by a process
+* With `netstat` it is possible to list internet port opened by a process
   * `yum -y install net-tools`
   * `netstat -tln` - Show TCP port opened by processes
 
@@ -284,3 +286,5 @@ References:
 * `ntpq -p` check current status of synchronization
 
 Both NTP and CHRONYD are using port ***123***. CHRONYD is working also on port **323**.
+
+[Back to top of the page: ⬆️](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/Networking.md#-networking)
