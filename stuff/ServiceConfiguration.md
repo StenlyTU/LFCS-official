@@ -178,11 +178,11 @@ References:
 
 ## Configure SSH servers and clients
 
-* `/etc/ssh/sshd_config` - ssh server configuration file
-  * `PermitRootLogin no` - Disable `root` login with ssh client
-  * `PasswordAuthenticaion no` - Disable login with password. This means that only login with public and private keys is allowed
-* `/etc/ssh/ssh_config` - ssh client configuration file
-  * `ForwardX11 yes` - allows use of X11 Server with ssh
+* `/etc/ssh/sshd_config` -> ssh server configuration file
+  * `PermitRootLogin no` -> Disable `root` login with ssh client
+  * `PasswordAuthenticaion no` -> Disable login with password. This means that only login with public and private keys is allowed
+* `/etc/ssh/ssh_config` -> ssh client configuration file
+  * `ForwardX11 yes` -> allows use of X11 Server with ssh
 
 * How to enable only specific user to login with password edit `/etc/ssh/sshd_config`:
   ```bash
@@ -209,18 +209,18 @@ References:
 
 ***Server management***:
 
-* `systemctl status sshd` to control ssh server status
-* `systemctl stop sshd` stop ssh server
-* `systemct start sshd` start ssh server
-* `systemctl restart sshd` restart ssh server
+* `systemctl status sshd` -> to control ssh server status
+* `systemctl stop sshd` -> stop ssh server
+* `systemct start sshd` -> start ssh server
+* `systemctl restart sshd` -> restart ssh server
   * It must be executed each time configuration file will be changed
-* `systemctl disable sshd` disable the ssh server start at boot
-* `systemctl enable sshd` enable the ssh server start at boot
+* `systemctl disable sshd` -> disable the ssh server start at boot
+* `systemctl enable sshd` -> enable the ssh server start at boot
 
 ***Client commands***:
 
-* `ssh 129.123.123.123 ` it try to connect current user to an ssh server located on 192.123.123.123
-* `ssh root@129.123.123.123 ` it try to connect root user to an ssh server located on 192.123.123.123
+* `ssh 129.123.123.123 ` -> it try to connect current user to an ssh server located on 192.123.123.123
+* `ssh root@129.123.123.123 ` -> it try to connect root user to an ssh server located on 192.123.123.123
 * `ssh -X root@129.123.123.123 ` 
   * `-X` enable X11 forwarding. This means that graphical application can be started
   * NOTE: It must be allowed on client configuration file as well.
@@ -235,7 +235,7 @@ References:
 * The keys will be stored in the user's home inside directory `.ssh`
   * `id_rsa` private key
   * `id_rsa.pub` public key
-* `ssh-copy-id 123.123.123.123` it is used to copy current user public key to home directory of same user on ssh server. The key will be stored in the user's home inside file `.ssh/authorized_keys`
+* `ssh-copy-id 123.123.123.123` -> it is used to copy current user public key to home directory of same user on ssh server. The key will be stored in the user's home inside file `.ssh/authorized_keys`
 
 * After that public key is copied on the server, user can use ssh client to login into the server without providing password
 
@@ -417,17 +417,17 @@ References:
   * *Images*: Read only template used to create container.
   * *Container*: Isolated application platform, it contains all the need to execute application
 
-* `yum install docker` It will install docker
+* `yum install docker` -> It will install docker
 
-* `systemctl start docker` It start docker
+* `systemctl start docker` -> It start docker
 
-* `docker version` to test if docker is working properly
+* `docker version` -> to test if docker is working properly
 
-* `usermod -aG dockerroot user` - This will enable *user* to use docker
+* `usermod -aG dockerroot user` -> This will enable *user* to use docker
 
-* `docker search java` - Search java image in docker hub
+* `docker search java` -> Search java image in docker hub
 
-* `docker images` - List local images
+* `docker images` -> List local images
 
 * Run container, examples:
   * `docker run busybox ls`
@@ -440,40 +440,40 @@ References:
   * `-t` get pseudo terminal
   *  **NOTA**: `ctrl+p+q` exit form terminal without terminate container execution
 
-* `docker run -d centos:7 ping 127.0.0.1` - Container will be executed in detached mode. This means that is in execution in background and not attached to Bash shell
+* `docker run -d centos:7 ping 127.0.0.1` -> Container will be executed in detached mode. This means that is in execution in background and not attached to Bash shell
 
 * `docker ps -a`
   * List all container
   * `-a` show container stopped as well
 
-* `docker attach <container_name>` - Attach to container in detached mode
-* `docker logs <container_name>` - Show logs of a container
+* `docker attach <container_name>` -> Attach to container in detached mode
+* `docker logs <container_name>` -> Show logs of a container
 * `docker run -d  -P nginx`
   * Map container ports to host ports
   * **NOTE**: *firewalld* must be enable and running
 
-* `docker run -d -P --restart always nginx` - T**his container will be restarted at bootstrap if the guest host will be restarted**
-* `docker update --restart=no containername` - **Disable auto restart at bootstrap**
+* `docker run -d -P --restart always nginx` -> **This container will be restarted at bootstrap if the guest host will be restarted**
+* `docker update --restart=no containername` -> **Disable auto restart at bootstrap**
 
 * Stop container:
   * `docker stop <container_name>`
-  * `docker kill <container_name>` forced stop
+  * `docker kill <container_name>` -> forced stop
 
-* `docker start name` - Restart a stopped container
+* `docker start name` -> Restart a stopped container
 
-* `docker rm <container_name>` - Remove a container. It must be stopped
+* `docker rm <container_name>` -> Remove a container. It must be stopped
 
-* `docker rmi <image_id>` - Remove local image
+* `docker rmi <image_id>` -> Remove local image
 
-* `docker diff <container_name>` - List differences between container and original images. E.g. Some software can be installed in running container
+* `docker diff <container_name>` -> List differences between container and original images. E.g. Some software can be installed in running container
 
-* `docker commit <container_name>` - Create a new image using based on the content of current running container. E.g It will contain software that was installed in container
+* `docker commit <container_name>` -> Create a new image using based on the content of current running container. E.g It will contain software that was installed in container
 
 
 ## Manage and configure Virtual Machines
 
-* `yum install qemu-kvm qemu-img libvirt virt-install libvirt-client` - this will install all tools needed to manage and configure virtual machines
-* `systemctl start libvirtd` - this will start daemon needed to manage virtual enviroments
+* `yum install qemu-kvm qemu-img libvirt virt-install libvirt-client` -> this will install all tools needed to manage and configure virtual machines
+* `systemctl start libvirtd` -> this will start daemon needed to manage virtual enviroments
 
 Manage storage volume
 
@@ -489,11 +489,11 @@ Manage storage volume
   * `virsh pool-start`
   * `virsh pool-autostart`
 
-* In files `/etc/libvirt/storage/*.xml` - you can find info about storage pool
+* In files `/etc/libvirt/storage/*.xml` -> you can find info about storage pool
 
 * Create a virtual disk
 
-  * `qemu-img create -f raw /media/vdisk/disk.img 1G` - size will be 1G
+  * `qemu-img create -f raw /media/vdisk/disk.img 1G` -> size will be 1G
 
 Manage Virtual Machines
 
@@ -509,32 +509,32 @@ Manage Virtual Machines
 
 * Virtual Machine management
 
-  * `virsh list --all` - List all available virtual machines in any state
+  * `virsh list --all` -> List all available virtual machines in any state
 
-  * `virsh start rhel7` - Start a virtual machine called rhel7
+  * `virsh start rhel7` -> Start a virtual machine called rhel7
 
-  * `virsh shutdown rhel7` - Shutdown virtual machine  called rhel7
+  * `virsh shutdown rhel7` -> Shutdown virtual machine  called rhel7
 
-  * `virsh destroy rhel7` - Forced shutdown of a virtual machine called rhel7
+  * `virsh destroy rhel7` -> Forced shutdown of a virtual machine called rhel7
 
-  * `virsh undefine rhel7` - Delete a virtual machine called rhel7
+  * `virsh undefine rhel7` -> Delete a virtual machine called rhel7
 
-  * `virsh console rhel7` - Establish a connection toward virtual machine called rhel7
+  * `virsh console rhel7` -> Establish a connection toward virtual machine called rhel7
 
     **NOTE**:  console must be configured in virtual machine
 
     `ctrl+5` to exit
 
-  * `virsh autostart rhel7` - **Set the virtual machine to re-start if hosting machine will be rebooted**
-  * `virsh autostart --disable rhel7` - **Disable autostart**
+  * `virsh autostart rhel7` -> **Set the virtual machine to re-start if hosting machine will be rebooted**
+  * `virsh autostart --disable rhel7` -> **Disable autostart**
 
 * Edit virtual machine
 
-  * `virsh dominfo rhel7` - It shows virtual machine information
+  * `virsh dominfo rhel7` -> It shows virtual machine information
 
-  * `virsh edit rhel7` - Edit configuration file of virtual machine called rhel7
+  * `virsh edit rhel7` ->Edit configuration file of virtual machine called rhel7
 
-  * `virsh vcpucount rhel7` - **It shows the number of virtual cpu**
+  * `virsh vcpucount rhel7` -> **It shows the number of virtual cpu**
 
     * **maximum config**: Specifies the maximum number of virtual CPUs that can be made available for the virtual server after the next restart.
 
@@ -544,15 +544,15 @@ Manage Virtual Machines
 
     * **current live**: Specifies the actual number of virtual CPUs which are available for the running or paused virtual server
 
-  * `virsh setvcpus --count 2 rhel7 --maximum --config` - It sets the maximum number of virtual cpu in configuration file to 2. It require virtual machine reboot to be applied. After reboot maximum live will be aligned
+  * `virsh setvcpus --count 2 rhel7 --maximum --config` -> It sets the maximum number of virtual cpu in configuration file to 2. It require virtual machine reboot to be applied. After reboot maximum live will be aligned
 
-  * `virsh setvcpus --count 2 rhel7 --config` - It sets the configur for virtual machine. This value is the value with which virtual machine will be booted
+  * `virsh setvcpus --count 2 rhel7 --config` -> It sets the configur for virtual machine. This value is the value with which virtual machine will be booted
 
-  * `virsh setvcpus --count 2 rhel7` - Set the number of virtual cpu (current live). Number must be less or equal to maximum live. You cannot remove virtual CPUs from a running virtual server
+  * `virsh setvcpus --count 2 rhel7` -> Set the number of virtual cpu (current live). Number must be less or equal to maximum live. You cannot remove virtual CPUs from a running virtual server
 
-  * `virsh setmaxmem --size 2G rhel7` - It sets the maximum amount of virtual machine memory. Virtual machine must be off
+  * `virsh setmaxmem --size 2G rhel7` -> It sets the maximum amount of virtual machine memory. Virtual machine must be off
 
-  * `virsh setmem --size 2G rhel7` - It sets the amount of virtual machine memory. Virtual machine must be running
+  * `virsh setmem --size 2G rhel7` -> It sets the amount of virtual machine memory. Virtual machine must be running
 
 References:
 

@@ -24,15 +24,15 @@
 
 ## List, create, delete, and modify physical storage partitions
 
-* `lsblk` lists all available disk devices plus available partitions
+* `lsblk` -> lists all available disk devices plus available partitions
 
-* `fdisk` it is used to manage disk partition in MBR modality
+* `fdisk` -> it is used to manage disk partition in MBR modality
 
   * E.g. `fdisk /dev/sda`
 
     This will open an interactive menu that will permit to show current status of partitions or create a delete new partitions
 
-* `gdisk` it is used to manage disk partition in GPT modality
+* `gdisk` -> it is used to manage disk partition in GPT modality
 
   - E.g. `gdisk /dev/sda`
 
@@ -98,7 +98,7 @@ Logical volume
 * Before using a logical volume, file system must be created on it with: `mkfs -t ext4 /dev/vgname/volumename`
 
 * Add entry to `/etc/fstab`
-  * `blkid /dev/vgname/volumename ` shows the UUID of a formatted volume group
+  * `blkid /dev/vgname/volumename` -> shows the UUID of a formatted volume group
   * You can use: `/dev/mapper/vgname-volumename` or `/dev/vgname/volumename` it's the same.
 
 * `lvextend -L +1G -r vgname/volumename ` -> Extends the logical volume *volumename* of one giga and resize
@@ -145,7 +145,7 @@ Encrypt
 Close device
 
 * Unmount device
-* `cryptsetup close namenewdevice` close *namenewdevice*
+* `cryptsetup close namenewdevice` -> close *namenewdevice*
 
 Automount
 
@@ -200,7 +200,7 @@ Automount
 
 ***SMB protocol***
 
-* `yum -y install samba-client cifs-utils` it installs software need to manage CIFS/SMB protocol
+* `yum -y install samba-client cifs-utils` -> it installs software need to manage CIFS/SMB protocol
 
 * Samba configuration file: ` /etc/samba/smb.conf`
 
@@ -223,7 +223,7 @@ Automount
 
 ***NFS protocol***
 
-* `yum -y install nfs-utils` it install software to manage NFS protocol
+* `yum -y install nfs-utils` -> it install software to manage NFS protocol
   1. `systemctl enable nfs-server --now`
   2. Shared files are configure in `/etc/exports` like this:
       ```bash
@@ -266,7 +266,7 @@ Automount
 Concepts:
 
 * Parity disk. It is used to provide fault tolerance. 
-* The spare device. It doesn't take part of the RAID and it is used only in case of a disk fault. In this case spare enter in the RAID and the content of lost disk is reconstructed and saved on it.
+* The spare device. It doesn't take part of the RAID(Redundant Array of Independent Disks) and it is used only in case of a disk fault. In this case spare enter in the RAID and the content of lost disk is reconstructed and saved on it.
 
 
 * `yum -y install mdadm` -> Installs software to manage RAID devices
@@ -355,9 +355,9 @@ Automount NFS directory
 
 * Check the *default* mount option for ext4(/dev/sdb1) -> `tune2fs -l /dev/sdb1 | grep -i default`
 
-* `getfacl file` shows ACL applied to a file
+* `getfacl file` -> shows ACL applied to a file
 
-* `setfacl -R -m g:sales:rx file` set ACL on file
+* `setfacl -R -m g:sales:rx file` -> set ACL on file
 
   * `-R` recursive, if file is a directory, ACL will be applied to all file inside it
   * `-m` modify
@@ -366,17 +366,17 @@ Automount NFS directory
     * `u` user
     * `o` other
 
-* `setfacl -m u:dummy:- file` remove all permissions of user dummy. 
+* `setfacl -m u:dummy:- file` -> remove all permissions of user dummy. 
 
-* `setfacl -m d:g:sales:rx directory` set a <u>default ACL</u> to a directory. In this way all files created inside it will have same ACL as default
+* `setfacl -m d:g:sales:rx directory` -> set a <u>default ACL</u> to a directory. In this way all files created inside it will have same ACL as default
 
   The default ACL is a specific type of permission assigned to a directory, that doesn’t change the permissions of the directory itself, but makes so that specified ACLs are set by default on all the files created inside of it
 
 * If an ACL is applied, when `ls -la` is executed an + is inserted after other permissions. The "." in the end shows that ACL is supported.
 
-* `setfacl -x u:test:w test` remove ACL 
+* `setfacl -x u:test:w test` -> remove ACL 
 
-* `setfacl -b file` removes all ACL
+* `setfacl -b file` -> removes all ACL
 
 
 **Extended attributes**
@@ -388,8 +388,8 @@ Automount NFS directory
 * `chattr +i file` -> Add *immutable* attribute to a file. It cannot be deleted or removed
 * `chattr -i file` -> Remove *immutable* attribute from a file.
 * `chattr -a file` -> The file can only be opened in append mode for writing.
-* `chattr -a file` -> When a file with this attribute set is open, its atime(last time the file was accessed/opened) record is not changed.
-* `lsattr file` shows file's extended attributes
+* `chattr -A file` -> When a file with this attribute set is open, its atime(last time the file was accessed/opened) record is not changed.
+* `lsattr file` -> shows file's extended attributes
 
 
 ## Setup user and group disk quotas for filesystems
@@ -430,9 +430,9 @@ Automount NFS directory
 
 * `xfs_quota`
   * -c is command -x is expert mode
-  * `xfs_quota -c "quota delme1"` - Show quota for user delme1
-  * `xfs_quota -xc "report -h" /mnt/quota` - Enter expert mode and show quota for `/mnt/quota`
-  * `xfs_quota -xc "limit -u bsoft=30m bhard=40m delme1" /mnt/quota` - Set block quota  for user delme1
+  * `xfs_quota -c "quota delme1"` -> Show quota for user delme1
+  * `xfs_quota -xc "report -h" /mnt/quota` -> Enter expert mode and show quota for `/mnt/quota`
+  * `xfs_quota -xc "limit -u bsoft=30m bhard=40m delme1" /mnt/quota` -> Set block quota  for user delme1
 
 ## Create and configure file systems
 
