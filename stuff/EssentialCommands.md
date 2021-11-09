@@ -199,7 +199,7 @@ References:
 
   * It's possible to insert text
 
-* `uniq file`Remove equal consecutive rows
+* `uniq file` - Remove equal consecutive rows
 
   * `uniq -w 2 fle` - Remove equal consecutive rows comparing only first two characters
 
@@ -215,20 +215,20 @@ References:
 
   * `cut -d '  ' -f 1,3 file` -  Print first and third word of each line. Delimiter will be space
 
-* `cat file`Print file content
-* `tail file` Print last 10 file lines
-  * `tail -n 5 file` Print last 5 file lines
-  * `tail -f file` Print last 10 file lines and append. Useful to monitor log files
-* `head file` Print first 10 file lines
-  * `head -n 2 file` Print first 2 file lines
+* `cat file` - Print file content
+* `tail file` - Print last 10 file lines
+  * `tail -n 5 file` - Print last 5 file lines
+  * `tail -f file` - Print last 10 file lines and append. Useful to monitor log files
+* `head file` - Print first 10 file lines
+  * `head -n 2 file` - Print first 2 file lines
 
-* `tr SET1 SET2` translate set of characters one to set of characters two
+* `tr SET1 SET2` - translate set of characters one to set of characters two
 
   * `cat file | tr test sub` - It will replace all occurrences of test with sub
 
   * `cat file | tr -s ' '` - It will replace all consecutive occurrences of space with one space
 
-* `file namefile` print the type of namefile
+* `file namefile` - print the type of namefile
 
 
 ## Use input-output redirection (e.g. >, >>, |, 2>)
@@ -267,10 +267,6 @@ There are operator to redirect input, ouput and error.
 
   *  `find /etc -name '\*a\*' 2> /dev/null | less`
 
-References:
-
-* [https://www.html.it/pag/53628/redirezione-dellio/](https://www.html.it/pag/53628/redirezione-dellio/)
-
 
 ## Analyze text using basic regular expressions
 
@@ -306,15 +302,15 @@ References:
 
   Search pattern inside the strings of the files in path/*. Show file name and row matching pattern
 
-  It is no recursive and key sensitive. To have recursion -r must be added
+  It is no recursive and key sensitive. To have recursion -r must be added.
 
   Pattern can be a regular expression. The regular expression must be surrounded by '  ' otherwise content could match bash globing. 
 
-  * `grep -l patter path/*` - Search pattern inside file in path/*. Show only file name
+  * `grep -l patter path/*` - Search pattern inside file in path/*. Show only file name.
 
-  * `grep -lr patter path/*` - Search pattern inside file in path/* and path subdirectories. Show only file name
+  * `grep -lr patter path/*` - Search pattern inside file in path/* and path subdirectories. Show only file name.
 
-  * `grep -ilr patter path/*` - Search pattern ignoring case inside file in path/* and path subdirectories. Show only file name
+  * `grep -ilr patter path/*` - Search pattern ignoring case inside file in path/* and path subdirectories. Show only file name.
 
 
 
@@ -339,47 +335,29 @@ Regular Expressions
 
 * sed - Without `-i` the results of file alteration won't be permanent
 
-  * `sed 's/source/target/' file`
+  * `sed 's/source/target/' file` - In any row of file, it will change first occurrence of source to target. Print all rows.
 
-    In any row of file, it will change first occurrence of source to target. Print all rows
+  * `sed 's/source/target/g' file`- In any row of file, it will change all occurrences of source to target. Print all rows.
 
-  * `sed 's/source/target/g' file`
+  * `sed 's/source/target/gI'` - In any row of file, it will change all occurrences of source to target. Ignore case = case insensitive. Print all rows.
 
-    In any row of file, it will change all occurrences of source to target. Print all rows
+  * `sed '10s/source/target/' file` - For row 10, it will change first occurrence of source to target. Print all rows.
 
-  * `sed 's/source/target/gI'`
+  * `sed -n 's/source/target/p'` - In any row of file, it will change first occurrence of source to target. Print only changed rows.
 
-    In any row of file, it will change all occurrences of source to target. Ignore case = case insensitive. Print all rows
-
-  * `sed '10s/source/target/' file`
-
-    For row 10, it will change first occurrence of source to target. Print all rows
-
-  * `sed -n 's/source/target/p'`
-
-    In any row of file, it will change first occurrence of source to target. Print only changed rows
-
-  * `sed -n '/source/p' file`  - It will print only rows that contain source. It is equal to grep source file
+  * `sed -n '/source/p' file` - It will print only rows that contain source. It is equal to grep source file
 
   * `sed -n 2,4p file` - Show lines from 2 to 4.
 
-  * `sed '10s/source/target/' file` - For row 10, it will change first occurrence of source to target. Print all rows
+  * `sed '/source/d' file` - Delete rows with source.
 
-  * `sed -n 's/source/target/p'` - In any row of file, it will change first occurrence of source to target. Print only changed rows
+  * `sed -n 12d file` - Delete row 12.
 
-  * `sed '/source/d' file` - Delete rows with source
+  * `sed '11inewline' file` - It will insert newline as line 11.
 
-  * `sed -n 12d file` - Delete row 12
+  * `sed -i 's/source/target/g' file` - In any row of file, it will change all occurrences of source to target. Save result to file.
 
-  * `sed '11inewline' file` - It will insert newline as line 11
-
-  * `sed -i 's/source/target/g' file`
-
-    In any row of file, it will change all occurrences of source to target. Save result to file
-
-  * `sed -i.orign 's/source/target/g' file`
-
-    In any row of file, it will change all occurrences of source to target. Save result to file but keep an copy of original file with name file.orign
+  * `sed -i.orign 's/source/target/g' file` - In any row of file, it will change all occurrences of source to target. Save result to file but keep an copy of original file with name file.orign
 
 References:
 
@@ -388,7 +366,7 @@ References:
 
 ## Archive, backup, compress, unpack, and uncompress files
 
-* `tar` Save many files into a single file
+* `tar` - Save many files into a single file.
 
   `tar` uses `gzip`, `bzip2` and `xz` compression. `Gzip` is fast and more common, but it generally compresses a bit less. `Bzip2` is slower, but it compresses a bit more. `XZ` is the newest.
 
@@ -402,11 +380,11 @@ References:
 
   * `tar czvf file.tar.gz *` - Create gzip file.
 
-  * `tar tf file.tar` - Show content of file.tar. **Note**: file.tar isn't compressed
+  * `tar tf file.tar` - Show content of file.tar.
 
-  * `tar --delete -f test.tar file` - Delete file from test.tar. **Note**: test.tar isn't compressed
+  * `tar --delete -f test.tar file` - Delete file from test.tar. **Note**: test.tar isn't compressed.
 
-  * `tar --update -f test.tar file` - Update file in test.tar. **Note**: test.tar isn't compressed
+  * `tar --update -f test.tar file` - Update file in test.tar. **Note**: test.tar isn't compressed.
 
   * `tar X<(command that generate list) -c -f file.tar *`
 
@@ -420,7 +398,7 @@ References:
 
 * Backup a device
 
-  `dd if=/dev/sda of=/system_images/sda.img` - Device must be unmounted
+  `dd if=/dev/sda of=/system_images/sda.img` - Device must be unmounted.
 
 * Restore device
 
@@ -428,7 +406,7 @@ References:
 
 * `rsync` it is used to keep synchronized the content of two directories
 
-  * `yum -y install rsync` Install rsync command
+  * `yum -y install rsync` - Install rsync command
 
   * `rsync -av source dest`
 
@@ -449,9 +427,9 @@ References:
 
 You must be able to check results of activities.
 
-* `ls` list directory content
+* `ls` - list directory content
 
-  * `ls -l` long output. It will print more columns 
+  * `ls -l` - long output. It will print more columns .
 
     File Type+Permissions - Number of links - Owner - Group - Size - Creation date - Creation hour - Name
 
@@ -461,44 +439,46 @@ You must be able to check results of activities.
     * `d`: directory
     * `l`: link
 
-  * `ls -la` long output plus hidden files
+  * `ls -la` - long output plus hidden files.
 
-  * `ls -lR` long output recursive (show subdirectories content)
+  * `ls -lR` - long output recursive (show subdirectories content).
 
-  * `ls -lt` long output sorted by modification time
+  * `ls -lt` - long output sorted by modification time.
 
-  * `ls -ld /etc` show the directory properties and not its content
+  * `ls -ld /etc` - show the directory properties and not its content.
 
-* `du file` show disk usage
-  * `du directory` show space used by directory and each subdirectory. It is recursive
-  * `du -s directory` summarize space used by directory and subdirectory
-  * `du *` show space of each file in current directory
-* `pwd` print current directory
+* `du file` - show disk usage.
+  * `du directory` - show space used by directory and each subdirectory. It is recursive.
+  * `du -s directory` - summarize space used by directory and subdirectory.
+  * `du *` - show space of each file in current directory.
+* `pwd` - print current directory.
 
-- `touch file` - It creates an empty file
+- `touch file` - It creates an empty file.
 
-* `cp source destination` copy source file to destination
+* `cp source destination` - copy source file to destination.
 
-  * `cp file1 file2 ./dest` - Copy file2 and file2 to directory dest
+  * `cp file1 file2 ./dest` - Copy file2 and file2 to directory dest.
 
-  * `cp * ./dest` - Copy all file of current directory to directory dest
+  * `cp * ./dest` - Copy all file of current directory to directory dest.
 
-  * `cp -r dir1 dir2` - Copy dir1 in dir2. `-r` recursive
+  * `cp -r dir1 dir2` - Copy dir1 in dir2. `-r` recursive.
 
-* `mkdir dir` create directory dir
+  * `cp -a source destionation` - Will copy the file preserving it's permissions.
 
-  * `mkdir -p dir/dir2` - Create a directory dir with a subdirecotory dir2
+* `mkdir dir` - create directory dir.
 
-* `rmdir dir` remove dir. Note: dir must be empty
-* `tree` show directories tree
-  * `yum -y install tree` to install tree
+  * `mkdir -p dir/dir2` - Create a directory dir with a subdirecotory dir2.
 
-* `mv file file2` rename file in file2
-  * `mv file dir` move file in directory dir
-  * `mv dir ..` move directory dir at the upper directory level
-* `rm file` delete file
-  * `rm -f file` remove read-only file
-  * `rm -r dir` remove directory dir and all subdirectories and files
+* `rmdir dir` - remove dir. Note: dir must be empty.
+* `tree` - show directories tree.
+  * `yum -y install tree` - to install tree.
+
+* `mv file file2` - rename file in file2.
+  * `mv file dir` - move file in directory dir.
+  * `mv dir ..` - move directory dir at the upper directory level.
+* `rm file` - delete file.
+  * `rm -f file` - remove read-only file.
+  * `rm -r dir` - remove directory dir and all subdirectories and files.
 
 
 ## Create and manage hard and soft links
@@ -511,7 +491,7 @@ File-system object attributes may include metadata (times of last change, access
 
 Directories are lists of names assigned to i-nodes. A directory contains an entry for itself, its parent, and each of its children.
 
-Each i-nodes is identified by a unique i-node numbers
+Each i-nodes is identified by a unique i-node numbers.
 
 *To summarize*: directory contains filenames, that is associated to i-node, that contains reference to data block.
 
@@ -531,14 +511,14 @@ Each i-nodes is identified by a unique i-node numbers
 * This means that there will by this chain: link -> filename -> i-node
   * If filename is removed, link will become invalid
 
-* Note: permissions on a link are "open", because real permission are associate to i-node
+* Note: permissions on a link are "open", because real permission are associate to i-node.
 
-* `ls -li` in first column show the i-node number
-* `ln target newname` It will create and hard link to the same i-node of target with name (filename) newname
-* `ln -s target newlink` It will create a symbolic link to target called newlink
-  * `ln -s /var .` It will create a symbolic link to var in current directory. The name of link will be var
+* `ls -li` - in first column show the i-node number.
+* `ln target newname` - It will create and hard link to the same i-node of target with name (filename) newname.
+* `ln -s target newlink` - It will create a symbolic link to target called newlink.
+  * `ln -s /var .` - It will create a symbolic link to var in current directory. The name of link will be var.
 
-**Note**: A file is considered deleted when they don't exist anymore hard link to same i-node. This means that `rm` remove link, hard or symbolic.
+**Note**: A file is considered deleted when there are no hard link to file's i-node. This means that `rm` remove link, hard or symbolic.
 
 References:
 
@@ -561,11 +541,9 @@ The permissions for each file/directory are given for each of this category:
 * Group
 * Others
 
-Others are all other users that are not the owner and are not member of group.
+Others are all other users that *are not the owner* and *are not member of group*.
 
-**NOTE**: The order matters.
-
-For each category can be set below permissions
+For each category below permissions are valid:
 
 * Read
   * Octal value: 4
@@ -574,30 +552,30 @@ For each category can be set below permissions
 * Exec (Execution)
   * Octal value: 1
 
-The right that each permission provide are different and depends if target is a file or a directory:
+The rights that each permission provide are different and depends if target is a file or a directory:
 
 |           |     File     |   Directory   |
 | :-------: | :----------: | :-----------: |
 | Read (4)  | Read or Exec |   List (ls)   |
-| Write (2) |    Modify    | Create Delete |
+| Write (2) |    Modify    | Create/Delete |
 | Exec (1)  |     Run      |      cd       |
 
-**Note**: When exec is set for group of other, file will be executed with identity of the user that are executing command (user ID) and group of user (group ID)
+**Note**: When exec is set for group on other section, file will be executed with identity of the user that are executing command (user ID) and group of user (group ID)
 
 Absolute mode:
 
-* Use numbers for each permission, that must be added if more that a permission 
+* Use numbers for each permission.
 
-* `chmod 760 file` Change file permission
+* `chmod 760 file` - Change file permission
   * Owner: grant read, write and exec
   * Group: grant read, write
   * Others: no permission
 
 Relative mode:
 
-* `chmod +x file` Add exec to owner, group and other
-* `chmod g+w file` Add write to group
-* `chmod o-rw file` Remove read and write to others
+* `chmod +x file` - Add exec to owner, group and other.
+* `chmod g+w file` - Add write to group.
+* `chmod o-rw file` - Remove read and write to others.
 
 
 **Advanced permissions**
@@ -618,7 +596,7 @@ There are other special permissions that can be granted to file/directories
 
 Absolute mode:
 
-* `chmod 4760 file` Change file permission
+* `chmod 4760 file` - Change file permission
   - Add suid
   - Owner: grant read, write and exec
   - Group: grant read, write
@@ -626,9 +604,9 @@ Absolute mode:
 
 Relative mode:
 
-* `chmod u+s file` set suid
-* `chmod g+s file` set guid
-* `chmod +t dir` set sticky bit
+* `chmod u+s file` - set suid
+* `chmod g+s file` - set guid
+* `chmod +t dir` - set sticky bit
 
 References:
 
@@ -637,45 +615,44 @@ References:
 
 ## Read, and use system documentation
 
-* `commad --help` - Show help of a command
+* `commad --help` - Show help of a command.
 
-* `man command` - Show command manual
+* `man command` - Show command manual.
 
-  * `man -k keyword` - Search a manual for provided keywork
+  * `man -k keyword` - Search a manual for provided keywork.
 
-     * `sudo mandb` Create database used by `man -k` command
+     * `sudo mandb` Create database used by `man -k` command.
 
   * `man -f printf` - Show man sections for the command. Doing the same as whatis.
 
-* `/usr/share/doc` - It contains configuration files examples
+* `/usr/share/doc` - It contains configuration files examples.
 
-* `info command` - It shows info document
+* `info command` - It shows info document.
 
-* bash completion
-  * During the digitalization of a command can be used the pressed two time Tab key to show possible value or parameter
-  * `yum -y install bash-completion` must be installed
+* Bash completion
+  * During the digitalization of a command can be used the pressed two time Tab key to show possible value or parameter.
+  * `yum -y install bash-completion` - must be installed.
 
 
 ## Manage access to the root account
 
-* ` root` is the system administrator
+* **root** is the system administrator.
 
 * When logged as root, shell prompts `#` character. Otherwise `$`
 
-* `su` Used to become root. It will continue to use the current session with user and group id substituted
-  * It will ask root password
-* `su -` Used to become root. It is same as logging into a fresh session on a terminal
-  * It will ask root password
-* `su - user` Login as user.
-  * It will be required user password
-  * If command is executed by root, password won't be required
+* `su` - Used to become root. It will continue to use the current session with user and group id substituted.
+  * It will ask root password.
+* `su -` - Used to become root. It is same as logging into a fresh session on a terminal.
+  * It will ask root password.
+* `su - user` - Login as user.
+  * It will be required user password.
+  * If command is executed by root, password won't be required.
 
 * `sudo -i` - ??? root login
 
 * `sudo -l` - This will list all of the rules in the `/etc/sudoers` file that apply to your user. This gives you a good idea of what you will or will not be allowed to do with sudo as any user.
 
-* `sudo` command to allow an ordinary user to execute commands as a different user
-  (usually the superuser)
+* `sudo` - command to allow an ordinary user to execute commands as a different user(usually the superuser).
 
 * In default configuration, group `wheel` is authorized to act as root. If a user is member of `wheel` can execute all command as root with this syntax:
   * `sudo command`
@@ -688,7 +665,6 @@ References:
   * Basic configuration:
   * ***demo*** ALL=(ALL:ALL)      ALL
     ​           The first field indicates the username that the rule will apply to.
-
   - demo ***ALL***=(ALL:ALL)      ALL
     ​           The first "ALL" indicates that this rule applies to all hosts.
   - demo ALL=(***ALL***:ALL)      ALL
@@ -706,27 +682,25 @@ References:
 
   If `-u` is not specified, this means that command will be executed as root.
 
-  demo user can open a root session running:
-
-  `sudo su -`
+  demo user can open a root session running: `sudo su -`
 
   The powerfulness of this command is that a root session can be opened only providing user password (in this case the password of user demo).
 
   This means that root direct login (with user and password) could be disabled and root session will be opened using only `sudo`. Some Linux distribution use this method as default configuration (e.g Ubuntu).
 
-  The advantage of this approach is that root password is not shared if I need to add a new system administrator.
+  The advantage of this approach is that root password is **not shared** if I need to add a new system administrator.
 
 * In sudo configuration `%` indicate group
 
   * %users  localhost=/sbin/shutdown -h now
 
-    The users in group users can execute command /sbin/shutdown -h now on localhost as root
+    The users in group users can execute command /sbin/shutdown -h now on localhost as root.
 
 * To simplify configuration in sudo configuration can be used alias
 
-  *  Cmnd_Alias SOFTWARE = /bin/rpm,/usr/bin/up2date, /usr/bin/yum
+  *  Cmnd_Alias SOFTWARE = /bin/rpm, /usr/bin/up2date, /usr/bin/yum
 
-    SOFTWARE can be used in sudo configuration rows
+    SOFTWARE can be used in sudo configuration rows.
 
 * **Examples**:
   * Modify the sudo configuration to let the user `candidate` access root privileges with no password prompt.
