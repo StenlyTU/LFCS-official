@@ -49,21 +49,21 @@
 
 ***Systemd commands:***
 
-* `systemctl get-default` - It shows default target
+* `systemctl get-default` - It shows default target.
 
-* `systemctl list-units --type target --all` - It shows all available targets
+* `systemctl list-units --type target --all` - It shows all available targets.
 
-* `systemctl set-default multi-user.target` - Set multi-user target as default
+* `systemctl set-default multi-user.target/runlevel3` - Set multi-user target as default.
 
 ***Change target at boot time:***
 
-* If during boot ESC is pressed the grub2 prompt will be showed
+* If during boot ESC is pressed the grub2 prompt will be showed.
 
-* Highlight a kernel and press 'e'
+* Highlight a kernel and press 'e'.
 
 * Now is it possible to modify the boot parameter used to load the kernel. 
 
-  **NOTE**: the changes are not persistent
+  **NOTE**: the changes are not persistent!
 
   E.g `systemd.unit=emergency.target` can be added to boot system in emergency mode. NOTE: in this modality disk is mounted read only, to mount it read/write, after boot execute `mount`
   `-o remount,rw /`
@@ -95,7 +95,9 @@ The default bootloader in Centos7 is GRUB2.
 
   `info -f grub -n 'Simple configuration'`
 
-  `man 7 bootparam` -> It shows the kernel boot parameter
+  `man 7 bootparam` -> It shows the kernel boot parameter.
+
+  - Grub useraccount are different than the Linux accounts!
 
 * When changes were made to /etc/default/grub they must be inserted in configuration file used directly by Grub2 which is **/boot/grub2/grub.cfg**. To do this execute:
 
@@ -117,7 +119,7 @@ The default bootloader in Centos7 is GRUB2.
 
     ![img](https://github.com/Bes0n/LFCS/blob/master/images/img26.JPG)
 
-    - once you done with fixing press **Ctrl + D** to continue booting.
+    - once you are done press **Ctrl + D** to continue booting.
 
   * ```emergency mode``` -  In contrast to the rescue mode, nothing is started in the emergency mode. No services are started, no mount points are mounted, no sockets are established, nothing. All you will have is just a raw shell. Emergency mode is suitable for debugging purposes.
 
@@ -232,13 +234,13 @@ The default bootloader in Centos7 is GRUB2.
 
 ***Signals:***
 
-* `kill pid` - Send a SIGTERM to process with pid equal to pid
+* `kill pid` - Send a SIGTERM to process with pid equal to pid.
 
-* `kill -9 pid` - Send a SIGKILL to process with pid equal to pid. Overkill
+* `kill -9 pid` - Send a SIGKILL to process with pid equal to pid. Overkill!
 
-* `kill -number pid` - Send a signal that correspond to number to process with pid equal to pid
+* `kill -number pid` - Send a signal that correspond to number to process with pid equal to pid.
 
-* `kill -l` - List all available signal and corresponding number
+* `kill -l` - List all available signal and corresponding number.
 
 References:
 
@@ -272,8 +274,8 @@ References:
 * In Centos many tools use `rsyslog` to manage logs. 
 
 * `rsyslog` is a daemon that permit the logging of data from different types of systems in a central repository
-  - `/etc/rsyslog.conf` configuration file of rsyslog
-  - `systemctl status rsyslog` -> to check execution status of rsyslog
+  - `/etc/rsyslog.conf` -> configuration file of rsyslog.
+  - `systemctl status rsyslog` -> to check execution status of rsyslog.
   - `logger -p cron.crit "someting bad happened"` -> Send a log message to cron facility with priority critical. It will be logged in **/var/log/cron** 
 
 * `logrotate` -> Is responsible for rotating the log files.
@@ -285,7 +287,7 @@ References:
 
   * `journalctl` -> Opens file system's journal. By default it kept in memory. It's going to be truncated when becomes too big. 
 
-  * `journalctl _PID=1` -> Search for logs related to the PID number 1
+  * `journalctl _PID=1` -> Search for logs related to the PID number 1.
 
   * `journalctl _UID=33 --since today` -> Show the logs for specific user.
 
@@ -389,13 +391,13 @@ References:
 
 * [https://en.wikipedia.org/wiki/Cron](https://en.wikipedia.org/wiki/Cron)
 
+
 ## Verify completion of scheduled jobs
 
-* Cron will send an email to internal mail spool 
+* Cron will send an email to internal mail spool.
 
+* Enable the logging  of crond events.
 
-
-* Enable the logging  of crond events
 * Edit the **/etc/rsyslog.conf** and remove comment from this line:
 
 ```bash
@@ -403,7 +405,7 @@ References:
 cron.*                                                  /var/log/cron
 ```
 
-* `systemctl restart rsyslog`  -> It will restart rsyslog server
+* `systemctl restart rsyslog`  -> It will restart rsyslog server.
 
 
 ## Update software to provide required functionality and security
@@ -421,7 +423,7 @@ References:
 
 ## Verify the integrity and availability of resources
 
-* `/usr/lib/rpm/rpmdb_verify /var/lib/rpm/Packages` It will verify the integrity of rpm database
+* `/usr/lib/rpm/rpmdb_verify /var/lib/rpm/Packages` -> It will verify the integrity of rpm database.
 
 * `rpm -V <package-name>` -> Verify integrity of package.
   * **NOTE**: When verifying a package, RPM produces output only if there is a verification failure. 
@@ -437,9 +439,9 @@ References:
   * `pgrep`
   * `mpstat`
 
-* `pkill -G 1000` - Kill all processes own by user with ID 1000
+* `pkill -G 1000` - Kill all processes own by user with ID 1000.
 
-* `pgrep -lG 1002 sleep` - Show all processes owned by user 1000 related to `sleep` command
+* `pgrep -lG 1002 sleep` - Show all processes owned by user 1000 related to `sleep` command.
 
 
 ## Change kernel runtime parameters, persistent and non-persistent
@@ -450,7 +452,7 @@ References:
 
 * `modprobe -r cdrom` - unload module cdrom.
 
-* In /proc/sys are contained kernel tunables, parameters that are used to customize the behavior of system
+* In /proc/sys are contained kernel tunables, parameters that are used to customize the behavior of system.
 
 * Example
 
@@ -604,13 +606,13 @@ References:
   * In case if you want to disable SELinux. Change SELINUX=enforcing to SELINUX=disabled and reboot. But you don't want to do that, system need to be secured.
 
 
-* `getenforce` - Show the SELinux state
+* `getenforce` - Show the SELinux state.
 
-* `sestatus` - Show the status of the SELinux
+* `sestatus` - Show the status of the SELinux.
 
 * `setenforce Permissive` - set the state to permissive. Only Enforcing or Permissive modes are available.
 
-* `setenforce Enforcing` - set the state to enforcing
+* `setenforce Enforcing` - set the state to enforcing.
 
 ***Context:***
 
@@ -655,13 +657,15 @@ References:
 
 * `setsebool -P httpd_read_user_content on` - To make permanent change into the specific SELinux Boolean.
 
+* `semanage boolean --modify httpd_read_user_content --on` - Change the boolean using **semanage** command.
+
 ***Ports:***
 
 * `semanage port -l | grep 22` -> Show SELinux Port type.
 
-* `semanage port -a -t ssh_port_t -p tcp 2222` -> Change it.
+* `semanage port -a -t ssh_port_t -p tcp 2222` -> Add port 2222 to the ssh ports.
 
-* `semanage port -d 82 -t http_port_t -p tcp` -> Delete it.
+* `semanage port -d 82 -t http_port_t -p tcp` -> Remove port 82 from http ports.
 
 ***Advanced usage:***
 
@@ -730,9 +734,9 @@ References:
 * `rpm -qpi tmux-1.8-4.el7.x86_64.rpm` -> Will print the information of a package. Can be done before installing it.
 
 * `rpm -qpl tmux-1.8-4.el7.x86_64.rpm` -> Show what files are included into the package.
-  - use `-qpc` for showing only config files.
-  - use `-qpd` for showing only doc files.
-  - use `-qpR` for the list of all dependencies of that RPM file.
+  - use `-qpc` for showing only **config** files.
+  - use `-qpd` for showing only **doc** files.
+  - use `-qpR` for the list of all **dependencies** of that RPM file.
 
 ## Identify the component of a Linux distribution that a file belongs to
 

@@ -17,7 +17,7 @@
 
 * Add users
 
-*  `useradd -D` print the default configuration used by useradd command
+*  `useradd -D` - print the default configuration used by useradd command.
 
   ```bash
   GROUP=100
@@ -39,37 +39,38 @@
 
   *SHELL=/bin/bash* -> default shell
 
-  *SKEL=/etc/skel* -> skeleton directory. <u>It's content will be copied in new user home directory</u>
+  *SKEL=/etc/skel* -> skeleton directory. It's content will be copied in new user home directory.
 
   *CREATE_MAIL_SPOOL=yes* -> User will have a mail spool to receive email
 
-* This configuration is saved in  `/etc/default/useradd`
+* This configuration is saved in `/etc/default/useradd`
 
-* Also  `/etc/login.defs` parameter are evaluated during user add
+* Also `/etc/login.defs` parameter are evaluated during user add.
 
-* Some parameter of `/etc/login.defs` will overwrite `/etc/default/useradd` parameters
+* Some parameter of `/etc/login.defs` will overwrite `/etc/default/useradd` parameters.
 
 * `/etc/login.defs` contains:
 
   * Location of mail spool
   * Settings about password
   * *CREATE_HOME   yes* -> create home directory
-  * *USERGROUPS_ENAB  yes* -> means that a group with same name of user must be created. This group will become default user group. This means that value of GROUP in `/etc/default/useradd` is overwritten
+  * *USERGROUPS_ENAB  yes* -> means that a group with same name of user must be created. This group will become default user group. This means that value of GROUP in `/etc/default/useradd` is overwritten.
 
 * `useradd` parameters:
 
-  * `-c` Any text string. It is generally a short description of the login, and is currently used as the field for the user's full name.
-  * `-e` date after which the user will be disabled
-  * `-g` primary group. NOTE: if not specified it will create new group with same name of user that will become user's primary group
-  * `-G` secondary groups
-  * `-m` create home directory. Useless because CREATE_HOME is yes
-  * `-p` configure password. **NOTE**: value must be provided encrypted
-    * Normally password is not provided during user add
-  * `-s` shell to use
+  * `-c` -> Any text string. It is generally a short description of the login, and is currently used as the field for the user's full name.
+  * `-e` -> date after which the user will be disabled.
+  * `-g` -> primary group. NOTE: if not specified it will create new group with same name of user that will become user's primary group.
+  * `-G` -> secondary groups.
+  * `-m` -> create home directory. Useless because CREATE_HOME is yes.
+  * `-p` -> configure password. **NOTE**: value must be provided encrypted.
+    * Normally password is not provided during user add.
+  * `-s` -> shell to use.
+  * `-N` -> Do not create a group with the same name as the user.
 
 * When a user is created two file will be changed:
 
-  * `/etc/passwd` It contains users information, no passwords
+  * `/etc/passwd` It contains users information, no passwords.
     * Syntax:  
       * user name
       * x: means that password isn't stored here
@@ -77,9 +78,9 @@
       * groupid: primary group id (GID)
       * User Info: The comment field
       * home: home directory
-      * shell: shell
+      * shell
     * To edit file: `vipw`
-  * `/etc/shadow` It contains passwords plus passwords properties
+  * `/etc/shadow` It contains passwords plus passwords properties.
     * To edit file: `vipw -s`
 
 ***usermod***
@@ -92,8 +93,8 @@
   * `-s` -> Change the default user shell
   * `-e` -> Expire the user
 
-* `usermod -e 1 user` disable user
-* `usermod -e "" user` enable user
+* `usermod -e 1 user` - disable user.
+* `usermod -e "" user` - enable user.
 
 * `usermod -e 2021-11-27 <username>` -> ***Expire the user in one year.***
 
@@ -102,7 +103,7 @@
 * remove user
 * `userdel -r user`
   * `-r` remove home and email spool. **NOTE**: if not used, when new user with the same name is created there will be conflict.
-  * `-f` force. Delete user though he is logged
+  * `-f` force. Delete user though he is logged.
 
 ***passwd***
 
@@ -118,16 +119,18 @@
 * `echo newpass | passwd --stdin brenda`
   * It will change password of brenda
   * Can be used in a script
-  * **NOTE**: Dangerous, password is in clear text
+  * **NOTE**: Dangerous, password is in clear text.
 
-`chage` -> Give Password information for the user
+`chage` -> Give Password information for the user.
 
-* Change user password expiry information
-* If used without parameters will prompt for information
-* It will permit to change date when the password was last changed
+* Change user password expiry information.
+* If used without parameters will prompt for information.
+* It will permit to change date when the password was last changed.
 * `chage -l user`
 * `chage -E 2014-09-11 user`
   * Set a date after which user will be locked
+
+* `pwunconv/pwconv` - Move users password to **/etc/passwd** file.
 
 
 ## Create, delete, and modify local groups and group memberships
@@ -148,18 +151,21 @@
 
 * delete group
 
-***groupmod***
+***groupmod/usermod***
 
 * modify group
+  * `groupmod -n group_new group_old` - Rename Linux group.
 
-* `usermod -aG group user`
-  * Add group to user
+* `usermod -aG group user` - Add group to user.
   * -G list of secondary groups
-  * `-a` append. <u>**NOTE**: If not specified new group list will override current value</u>
+  * `-a` append. **NOTE**: If not specified new group list will override current value
 
 * `groups <username>` - Give list of groups for the user.
 
 * `gpasswd -d <username> <group>` - Delete user from the group.
+  * With ***gpasswd*** you can add user to group and specify all group members.
+
+* `newgrp wheel` - Used to change the current group ID during a login session, NOT creating new group.
 
 
 ## Manage system-wide environment profiles
@@ -187,7 +193,7 @@
 
 ***ulimit***
 
-* It limits the use of system-wide resources
+* It limits the use of system-wide resources.
 
 * `/etc/security/limits.d/` folder is used to add restrictions interactively. The file must end with `.conf` 
 
@@ -220,13 +226,13 @@
   root       soft    nproc     unlimited
   ```
 
-* `man limits.conf` for manual
+* `man limits.conf` - for manual.
 
 * Limits will be enforced in next opened session
 
 * `ulimit -a` -> List all limits for the current user.
 
-* `ulimit` command can also be used to change limits.
+* `ulimit` - command can also be used to change limits.
 
 * **NOTE**: **individual limits have priority over group limits**, so if you impose no limits for admin
        group, but one of the members in this group have a limits line, the user will have its limits set
