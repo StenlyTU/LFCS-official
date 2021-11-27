@@ -24,25 +24,30 @@
 
 ## List, create, delete, and modify physical storage partitions
 
-* `lsblk` -> lists all available disk devices plus available partitions
+* `lsblk` -> lists all available disk devices plus available partitions.
+  * Use `-f` to show filesystem type.
 
-* `fdisk` -> it is used to manage disk partition in MBR modality
+* `parted` -> is another tool doing the same. Used for scripting.
+
+* `fdisk` -> it is used to manage disk partition in MBR modality.
 
   * E.g. `fdisk /dev/sda`
 
-    This will open an interactive menu that will permit to show current status of partitions or create a delete new partitions
+    This will open an interactive menu that will permit to show current status of partitions or create a delete new partitions.
 
-* `gdisk` -> it is used to manage disk partition in GPT modality
+* `gdisk` -> it is used to manage disk partition in GPT modality.
 
   - E.g. `gdisk /dev/sda`
 
-* Destroy all MBR partition on a disk
+* Destroy all MBR partition on a disk.
 
   * `gdisk /dev/sda` -> `x` (expert) -> `z` (zap)
 
-* Convert MBT to GPT
+* Convert MBR to GPT.
 
   * `gdisk /dev/sda` -> `W` -> `Y`
+
+  * GPT held a copy of the partition table at the end of the disk.
 
 
 ## Manage and configure LVM storage
@@ -59,57 +64,62 @@ Physical Volume
 
 * `pvcreate /dev/sdb1`
 
-  To create a physical volume with partition sbd1
+  To create a physical volume with partition sbd1.
 
-* `pvs` -> Lists available physical volumes
+* `pvs` -> Lists available physical volumes.
 
-* `pvdisplay /dev/sdb1` -> Shows info of a physical volume
+* `pvdisplay /dev/sdb1` -> Shows info of a physical volume.
+
+* `pvmove /dev/sdb1 /dev/sdc10` -> Move the Volume to new disk.
 
 Volume Group
 
 * `vgcreate vgname /dev/sdb1`
 
-  To create a volume group called *vgname* and add the sdb1 physical volume to it
+  To create a volume group called *vgname* and add the sdb1 physical volume to it.
 
-* `vgs` -> Lists available volume groups
+* `vgs` -> Lists available volume groups.
 
-* `vgdisplay vgname` -> Shows info of a volume group
+* `vgdisplay vgname` -> Shows info of a volume group.
 
 * `vgextend vgname /dev/sdc3` -> Extends a volume group adding a new physical volume `/dev/sdc3`
 
-* `vgreduce vgname /dev/sdc3` -> Remove physical volume from a volume group
+* `vgreduce vgname /dev/sdc3` -> Remove physical volume from a volume group.
 
 Logical volume
 
 * `lvcreate -n volumename -L 10G vgname`
 
-  To create a logical volume called *volumename*  of size 10GB on volume group *vgname*
+  To create a logical volume called *volumename*  of size 10GB on volume group *vgname*.
 
 * `lvcreate -n volumename -l 100%FREE vgname`
 
-  To create a logical volume called *volumename*  with all available space on volume group *vgname*
+  To create a logical volume called *volumename*  with all available space on volume group *vgname*.
 
-* `lvs` -> List available logical volumes
+* `lvs` -> List available logical volumes.
 
-* `lvdisplay` -> Shows info of all logical volumes
+* `lvdisplay` -> Shows info of all logical volumes.
 
-* `lvdisplay vgname/volumename` -> Shows info of a logical volume *volumename* contained in *vgname* volume group
+* `lvdisplay vgname/volumename` -> Shows info of a logical volume *volumename* contained in *vgname* volume group.
 
 * Before using a logical volume, file system must be created on it with: `mkfs -t ext4 /dev/vgname/volumename`
 
 * Add entry to `/etc/fstab`
-  * `blkid /dev/vgname/volumename` -> shows the UUID of a formatted volume group
+  * `blkid /dev/vgname/volumename` -> shows the UUID of a formatted volume group.
   * You can use: `/dev/mapper/vgname-volumename` or `/dev/vgname/volumename` it's the same.
 
-* `lvextend -L +1G -r vgname/volumename ` -> Extends the logical volume *volumename* of one giga and resize
+* `lvextend -L +1G -r vgname/volumename ` -> Extends the logical volume *volumename* of one giga and resize.
 
-  * `-r`  is used to resize file system
+  * `-r`  is used to resize file system.
   * For xfs use `xfs_growfs /lvm` to resize the filesystem. 
   * To resize ExtN use -r or `resize2fs /dev/vgname/volumename`.
 
-* `lvreduce -L -1G -r vgname/volumename ` -> Reduce the logical volume *volumename* of one giga and resize
+* `lvreduce -L -1G -r vgname/volumename ` -> Reduce the logical volume *volumename* of one giga and resize.
 
-* `lvcreate -L 30M -s -n backup /dev/vgname/volumename` -> Create LVM Snapshot
+* `lvcreate -L 30M -s -n backup /dev/vgname/volumename` -> Create LVM Snapshot.
+  * `mount /dev/vgname/volumename/backup /mnt -o nouuid,ro` -> Mount the backup somewhere.
+
+* ![Migrate PVs](stuff/Migrate_PVs.png)
 
 ## Create and configure encrypted storage
 
@@ -176,20 +186,20 @@ Automount
     * Default mount options are used
     * 0 0 -> Dump (bkp) and fsck. 
       * First 0 means no backup required
-      * Second 0 means no fsck required in case of not correct umount. To enable fsck insert 2 because number indicate the check order, and 1 is given to operating system disk and two do data disks
+      * Second 0 means no fsck required in case of not correct umount. To enable fsck insert 2 because number indicate the check order, and 1 is given to operating system disk and two do data disks.
 
-* `mount` -> Shows mounted volumes
+* `mount` -> Shows mounted volumes.
 
-* `mount -a` -> Reloads /etc/fstab
+* `mount -a` -> Reloads /etc/fstab.
 
 * `mount -t type  -o options device dir`
 
-  * It mounts a *device* formatted with file system *type* on directory *dir* using a list of options
+  * It mounts a *device* formatted with file system *type* on directory *dir* using a list of options.
 
-  * options can be:
+  * Mount options can be found in `man mount`. There are general options for all FS and specific to FS. List of general mount options:
     * async -> I/O asincrono
     * auto -> Can be mounted using mount -a
-    * default ->Equal to this list of options: async,auto,dev,exec,nouser,rw,suid
+    * default -> Equal to this list of options: async,auto,dev,exec,nouser,rw,suid
     * loop -> To mount an ISO image
     * noexec -> no exec
     * nouser -> A user cannot mount this volume
@@ -289,7 +299,8 @@ Concepts:
   * `mdadm --create --verbose /dev/md0 --level=10 --raid-devices=4 /dev/sd[b-e]1 --spare-devices=1 /dev/sdf1`  
 
 * `mdadm --detail /dev/md0` -> Shows status of RAID device
-* To use device md0, format it and use as a classical device
+
+* To use device md0, format it and use as a classical device.
 
 * `cat /proc/mdstat` -> Give general info.
 
@@ -306,9 +317,7 @@ Monitoring RAID devices
 
 * `mdadm /dev/md0 --add /dev/sbc2`
 
-* `mdadm --grow --raid-devices=4 /dev/md0`
-
-  It adds a spare disk and after it grows array
+* `mdadm --grow --raid-devices=4 /dev/md0` - It adds a spare disk and after it grows array.
 
 ***Remove disk:***
 
@@ -355,11 +364,11 @@ Automount NFS directory
 
 * Check the *default* mount option for ext4(/dev/sdb1) -> `tune2fs -l /dev/sdb1 | grep -i default`
 
-* `getfacl file` -> shows ACL applied to a file
+* `getfacl file` -> shows ACL applied to a file.
 
-* `setfacl -R -m g:sales:rx file` -> set ACL on file
+* `setfacl -R -m g:sales:rx file` -> set ACL on file.
 
-  * `-R` recursive, if file is a directory, ACL will be applied to all file inside it
+  * `-R` recursive, if file is a directory, ACL will be applied to all file inside it.
   * `-m` modify
   * `g:sales:rx` group sales can read and execute
     * `g` group
@@ -368,16 +377,15 @@ Automount NFS directory
 
 * `setfacl -m u:dummy:- file` -> remove all permissions of user dummy. 
 
-* `setfacl -m d:g:sales:rx directory` -> set a <u>default ACL</u> to a directory. In this way all files created inside it will have same ACL as default
+* `setfacl -m d:g:sales:rx directory` -> Set a default ACL to a directory. In this way all files created inside it will have same ACL as default
 
-  The default ACL is a specific type of permission assigned to a directory, that doesn’t change the permissions of the directory itself, but makes so that specified ACLs are set by default on all the files created inside of it
+  The default ACL is a specific type of permission assigned to a directory, that doesn’t change the permissions of the directory itself, but makes so that specified ACLs are set by default on all the files created inside of it.
 
 * If an ACL is applied, when `ls -la` is executed an + is inserted after other permissions. The "." in the end shows that ACL is supported.
 
-* `setfacl -x u:test:w test` -> remove ACL 
+* `setfacl -x u:test:w test` -> remove ACL.
 
-* `setfacl -b file` -> removes all ACL
-
+* `setfacl -b file` -> removes all ACL.
 
 **Extended attributes**
 
@@ -385,11 +393,11 @@ Automount NFS directory
 * With some old filesystem a mount option (e.g. *user_xattr*) must be provided to enable extended attributes.
 
 * Only root user can remove an attribute!
-* `chattr +i file` -> Add *immutable* attribute to a file. It cannot be deleted or removed
+* `chattr +i file` -> Add *immutable* attribute to a file. It cannot be deleted or removed.
 * `chattr -i file` -> Remove *immutable* attribute from a file.
 * `chattr -a file` -> The file can only be opened in append mode for writing.
 * `chattr -A file` -> When a file with this attribute set is open, its atime(last time the file was accessed/opened) record is not changed.
-* `lsattr file` -> shows file's extended attributes
+* `lsattr file` -> shows file's extended attributes.
 
 
 ## Setup user and group disk quotas for filesystems
@@ -440,7 +448,7 @@ Automount NFS directory
 
 * `mkfs -t ext4 -L DATA /dev/sdb5` -> Creates the filesystem and label it.
 
-* `tune2fs -L MY_DATA /dev/sdb5` -> Change the label of the *ext* filesystem.
+* `tune2fs -L MY_DATA /dev/sdb5` -> Change the label of the *ext* filesystem. Can also be used to change other params like: filesystem_check count and count, etc.
 
 * `dumpe2fs /dev/sdb5` -> Give information for *ext* filesystem.
 
@@ -449,5 +457,9 @@ Automount NFS directory
 * `mount -o remount,noexec /dev/sdb1 /data/ext4` -> Add new mount option - *noexec*.
 
 * `umount /data/ext4` -> Unmount the partition.
+
+* For ***xfs*** use the following command. A lot of more options. Used in Enterprises:
+  - `mkfs.xfs -b size=1k -l size=10m /dev/sdb3`
+  - `xfs_db -x /dev/sdb3` -> Open interactive menu.
 
 [Back to top of the page: ⬆️](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/StorageManagement.md#storage-management)
