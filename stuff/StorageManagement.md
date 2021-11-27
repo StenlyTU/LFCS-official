@@ -119,7 +119,7 @@ Logical volume
 * `lvcreate -L 30M -s -n backup /dev/vgname/volumename` -> Create LVM Snapshot.
   * `mount /dev/vgname/volumename/backup /mnt -o nouuid,ro` -> Mount the backup somewhere.
 
-* ![Migrate PVs](/Migrate_PVs.png)
+* ![Migrate PVs](./Migrate_PVs.png)
 
 ## Create and configure encrypted storage
 
