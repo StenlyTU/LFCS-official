@@ -62,9 +62,7 @@
 
 Physical Volume
 
-* `pvcreate /dev/sdb1`
-
-  To create a physical volume with partition sbd1.
+* `pvcreate /dev/sdb1` -> To create a physical volume with partition sbd1.
 
 * `pvs` -> Lists available physical volumes.
 
@@ -74,9 +72,7 @@ Physical Volume
 
 Volume Group
 
-* `vgcreate vgname /dev/sdb1`
-
-  To create a volume group called *vgname* and add the sdb1 physical volume to it.
+* `vgcreate vgname /dev/sdb1` -> To create a volume group called *vgname* and add the sdb1 physical volume to it.
 
 * `vgs` -> Lists available volume groups.
 
@@ -126,19 +122,21 @@ Logical volume
 ## Create and configure encrypted storage
 
 * To use encrypted storage a kernel module must be loaded
-  * `sudo modprobe dm_crypt` -> Loads kernel module dm_crypt
-  * `echo dm_crypt >> /etc/modules-load.d/dm_crypt.conf` -> Load dm_crypt module automatically when system will be restarted
-  * `lsmod` -> Lists all loaded kernel modules
-* `yum -y install cryptsetup` -> Install software used to manage encrypted storage
+  * `sudo modprobe dm_crypt` -> Loads kernel module dm_crypt.
+  * `echo dm_crypt >> /etc/modules-load.d/dm_crypt.conf` -> Load dm_crypt module automatically when system will be restarted.
+  * `lsmod` -> Lists all loaded kernel modules.
+* `yum -y install cryptsetup` -> Install software used to manage encrypted storage.
+
+* `shred -v /dev/vg1/lv1` -> Overwrite a file to hide its contents.
 
 Encrypt
 
-* `cryptsetup luksFormat /dev/vgname/volumename` -> Encrypts a logical volume *volumename* contained in *vgname* volume group
+* `cryptsetup luksFormat /dev/vgname/volumename` -> Encrypts a logical volume *volumename* contained in *vgname* volume group.
 
-  * A password must be provided
-  * When confirmation will be required insert a capital <u>YES</u>
+  * A password must be provided.
+  * When confirmation will be required insert a capital <u>YES</u>.
 
-  * **NOTE**: this command can be used with physical volume as well
+  * **NOTE**: this command can be used with physical volume as well.
 
 * `cryptsetup luksDump /dev/vgname/volumename` -> Show header information of a LUKS device.
 
@@ -148,11 +146,9 @@ Encrypt
 
   * Password must be provided
 
-* `mkfs.ext4 /dev/mapper/namenewdevice` 
+* `mkfs.ext4 /dev/mapper/namenewdevice` -> It creates a file system in *namenewdevice*.
 
-  It creates a file system in *namenewdevice*
-
-  Now new the new device can be mounted
+  - Now the new device can be mounted.
 
 Close device
 
@@ -161,9 +157,9 @@ Close device
 
 Automount
 
-* `echo "passwd" >> /root/key` -> Insert a string that will be used that will be used as authentication key to open device
+* `echo "passwd" >> /root/key` -> Insert a string that will be used as authentication key to open device.
 
-* `chmod 400 /root/key` -> Reduces permission on key file
+* `chmod 400 /root/key` -> Reduces permission on key file.
 * `cryptsetup luksAddKey /dev/mapper/namenewdevice /root/key` -> Add key to encrypted device called *namenewdevice*
 * Edit `/etc/crypttab` and add below row:
   * `namenewdevice /dev/vgname/volumename /root/key`
@@ -405,29 +401,30 @@ Automount NFS directory
 ## Setup user and group disk quotas for filesystems
 
 ***ext quota:***
-* **Quota**: space that can be used by an user on one specific filesystem
-  * NOTE: To limit space in a directory it is better create a specific mount point with a specific partition
-* `yum -y install quota` installs software need to manage quota
+* **Quota**: space that can be used by an user on one specific filesystem.
+  * NOTE: To limit space in a directory it is better create a specific mount point with a specific partition.
+* `yum -y install quota` installs software need to manage quota.
 * ***usrquota,grpquota*** mount options must be inserted for filesystem to which enable quota (e.g. editing `/etc/fstab`)
-* After that options are inserted, remount partition to enable them
-* After remount execute `quotacheck -mavug` that check used blocks and inserted them in a tracking file
+* After that options are inserted, remount partition to enable them.
+* After remount execute `quotacheck -mavug` that check used blocks and inserted them in a tracking file.
   * Two files will be created:
     * aquota.group
     * aquota.user
 * `quotaon -a` -> Start quota system
   * Alternative:
-  * `quotaon -vu /mnt/mountpoint` -> It starts only quota user for specific mountpoint
-  * `quotaon -vg /mnt/mountpoint` -> It starts only quota group for specific mountpoint
-* `quota -vu user` shows user's quota
+  * `quotaon -vu /mnt/mountpoint` -> It starts only quota user for specific mountpoint.
+  * `quotaon -vg /mnt/mountpoint` -> It starts only quota group for specific mountpoint.
+* `quota -vu user` -> shows user's quota.
 * The quota is specified in blocks of 1K size and in number of inode that is the number of files that can be created.
-* Hard limit: maxim value allowed
+* Hard limit: maxim value allowed.
 * Soft limit: a limit that can be exceeded for a *grace period*. Default *grace period* is one week.
 * When grace period is reached, soft limit become and hard limit.
+* `setquota -u hriska 20000 2500 0 0 /dev/sdd2` - Set block limit quota for user hriska.
 * `edquota -t` -> Edit the grace period. Is an unique value for the whole system.
 * `edquota -u user` -> Edit user's quota.
-  * In each column can be insert a value for soft and hard limit for blocks and inode
-  * **NOTE**: Normally soft and hard limits are configured equal to avoid confusion 
-* `repquota -aug` -> It shows an overview of current quota for each users
+  * In each column can be insert a value for soft and hard limit for blocks and inode.
+  * **NOTE**: Normally soft and hard limits are configured equal to avoid confusion. 
+* `repquota -aug` -> It shows an overview of current quota for each users.
 
 * Soft limit=900 and the hard limit=1000 blocks (**1024 bytes/block * 1000 blocks = 1024000 bytes = 1 MB**) of disk space usage.
 
