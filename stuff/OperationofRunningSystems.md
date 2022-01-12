@@ -597,9 +597,9 @@ References:
 * In CentOS as MAC is used SELinux
 
 * SELinux can be in three states:
-  * *enforcing*: Actions contrary to the policy are blocked and a corresponding event is logged in the audit log
+  * *enforcing*: Actions contrary to the policy are blocked and a corresponding event is logged in the audit log.
   * *permissive*: Actions contrary to the policy are only logged in the audit log: `/var/log/audit/audit.log`
-  * *disabled*: The SELinux is disabled entirely
+  * *disabled*: The SELinux is disabled entirely.
   * The status can be configured in file `/etc/sysconfig/selinux` which is symlink to `/etc/selinux/config`. Changes to this file will be read only after reboot.
   * The state can be changed from *enforcing* to *permissive* and vice versa without system reboot.
   * When the state is set to disable the only way to re-enable SELinux is to change `/etc/sysconfig/selinux` and reboot.
@@ -618,7 +618,7 @@ References:
 
 * On systems running SELinux, all processes and files are labeled in a way that represents security-relevant information. This information is called the *SELinux context.*
 
-* Normally SELinux context is showed with `-Z` option
+* Normally SELinux context is showed with `-Z` option.
 
 * `ls -lZ` - show SELinux context of file
     ```
@@ -626,7 +626,7 @@ References:
     -rw-------. root root system_u:object_r:shadow_t:s0    /etc/shadow
     ```
 
-* `ps auxZ` - show SELinux context of processes
+* `ps auxZ` - show SELinux context of processes.
 
 * A SELinux context has the form *user:role:type*
   * To identify easy the user, role and type look at the last two characters: ...._u:...._r:...._t

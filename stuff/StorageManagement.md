@@ -277,7 +277,7 @@ Concepts:
 * The spare device. It doesn't take part of the RAID(Redundant Array of Independent Disks) and it is used only in case of a disk fault. In this case spare enter in the RAID and the content of lost disk is reconstructed and saved on it.
 
 
-* `yum -y install mdadm` -> Installs software to manage RAID devices
+* `yum -y install mdadm` -> Installs software to manage RAID devices.
 * RAID 0 - Striped - No spare
 
   * `mdadm --create --verbose /dev/md0 --level=stripe --raid-devices=2 /dev/sdb1 /dev/sdc1`
@@ -296,13 +296,13 @@ Concepts:
 
   * `mdadm --create --verbose /dev/md0 --level=10 --raid-devices=4 /dev/sd[b-e]1 --spare-devices=1 /dev/sdf1`  
 
-* `mdadm --detail /dev/md0` -> Shows status of RAID device
+* `mdadm --detail /dev/md0` -> Shows status of RAID device.
 
 * To use device md0, format it and use as a classical device.
 
 * `cat /proc/mdstat` -> Give general info.
 
-Monitoring RAID devices
+Monitoring RAID devices:
 
 * `mdadm --assemble --scan`
 * `mdadm --detail --scan >> /etc/mdadm.conf` -> Write configuration to the configuration file. This file helps to reinitialize RAID device after reboot.
@@ -338,7 +338,7 @@ References:
 
 ## Configure systems to mount file systems on demand
 
-* `yum -y install autofs` installs software need to manage automount
+* `yum -y install autofs` installs software need to manage automount.
 
 Automount NFS directory
 
@@ -356,7 +356,7 @@ Automount NFS directory
 
 **ACL - Access control list** 
 
-* They must be supported by the filesystem or build-in into the kernel. Check the kernel with the follwoing: `grep ACL /boot/confif-$(uname -r)`
+* They must be supported by the filesystem or build-in into the kernel. Check the kernel with the follwoing: `grep ACL /boot/config-$(uname -r)`
 
 * With some old filesystem a mount option (e.g. *acl*) must be provided to enable ACL.
 
@@ -366,16 +366,16 @@ Automount NFS directory
 
 * `setfacl -R -m g:sales:rx file` -> set ACL on file.
 
-  * `-R` recursive, if file is a directory, ACL will be applied to all file inside it.
-  * `-m` modify
-  * `g:sales:rx` group sales can read and execute
+  * `-R` -> recursive, if file is a directory, ACL will be applied to all file inside it.
+  * `-m` -> modify
+  * `g:sales:rx` -> group sales can read and execute
     * `g` group
     * `u` user
     * `o` other
 
 * `setfacl -m u:dummy:- file` -> remove all permissions of user dummy. 
 
-* `setfacl -m d:g:sales:rx directory` -> Set a default ACL to a directory. In this way all files created inside it will have same ACL as default
+* `setfacl -m d:g:sales:rx directory` -> Set a default ACL to a directory. In this way all files created inside it will have same ACL as default.
 
   The default ACL is a specific type of permission assigned to a directory, that doesn’t change the permissions of the directory itself, but makes so that specified ACLs are set by default on all the files created inside of it.
 
@@ -393,8 +393,8 @@ Automount NFS directory
 * Only root user can remove an attribute!
 * `chattr +i file` -> Add *immutable* attribute to a file. It cannot be deleted or removed.
 * `chattr -i file` -> Remove *immutable* attribute from a file.
-* `chattr -a file` -> The file can only be opened in append mode for writing.
-* `chattr -A file` -> When a file with this attribute set is open, its atime(last time the file was accessed/opened) record is not changed.
+* `chattr +a file` -> The file can only be opened in append mode for writing.
+* `chattr +A file` -> When a file with this attribute set is open, its atime(last time the file was accessed/opened) record is not changed.
 * `lsattr file` -> shows file's extended attributes.
 
 
@@ -403,14 +403,14 @@ Automount NFS directory
 ***ext quota:***
 * **Quota**: space that can be used by an user on one specific filesystem.
   * NOTE: To limit space in a directory it is better create a specific mount point with a specific partition.
-* `yum -y install quota` installs software need to manage quota.
+* `yum -y install quota` -> installs software need to manage quota.
 * ***usrquota,grpquota*** mount options must be inserted for filesystem to which enable quota (e.g. editing `/etc/fstab`)
 * After that options are inserted, remount partition to enable them.
 * After remount execute `quotacheck -mavug` that check used blocks and inserted them in a tracking file.
   * Two files will be created:
     * aquota.group
     * aquota.user
-* `quotaon -a` -> Start quota system
+* `quotaon -a` -> Start quota system.
   * Alternative:
   * `quotaon -vu /mnt/mountpoint` -> It starts only quota user for specific mountpoint.
   * `quotaon -vg /mnt/mountpoint` -> It starts only quota group for specific mountpoint.
@@ -419,7 +419,7 @@ Automount NFS directory
 * Hard limit: maxim value allowed.
 * Soft limit: a limit that can be exceeded for a *grace period*. Default *grace period* is one week.
 * When grace period is reached, soft limit become and hard limit.
-* `setquota -u hriska 20000 2500 0 0 /dev/sdd2` - Set block limit quota for user hriska.
+* `setquota -u hriska 20000 25000 0 0 /dev/sdd2` - Set block limit quota for user hriska.
 * `edquota -t` -> Edit the grace period. Is an unique value for the whole system.
 * `edquota -u user` -> Edit user's quota.
   * In each column can be insert a value for soft and hard limit for blocks and inode.
@@ -436,10 +436,10 @@ Automount NFS directory
   * pquota/pqnoenforce: Project quota
 
 * `xfs_quota`
-  * -c is command -x is expert mode
-  * `xfs_quota -c "quota delme1"` -> Show quota for user delme1
-  * `xfs_quota -xc "report -h" /mnt/quota` -> Enter expert mode and show quota for `/mnt/quota`
-  * `xfs_quota -xc "limit -u bsoft=30m bhard=40m delme1" /mnt/quota` -> Set block quota  for user delme1
+  * -c is command -x is expert mode.
+  * `xfs_quota -c "quota delme1"` -> Show quota for user delme1.
+  * `xfs_quota -xc "report -h" /mnt/quota` -> Enter expert mode and show quota for `/mnt/quota`.
+  * `xfs_quota -xc "limit -u bsoft=30m bhard=40m delme1" /mnt/quota` -> Set block quota  for user delme1.
 
 ## Create and configure file systems
 

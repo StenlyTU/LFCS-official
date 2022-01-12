@@ -34,25 +34,25 @@
 
 ***Hostname & Resolving:***
 
-* There are 3 different hostnames: `static`, `transient` and `pretty` hostname
+* There are 3 different hostnames: `static`, `transient` and `pretty` hostname.
 
 * The hostname can be changed editing `/etc/hostname`.
 
-  * `hostname` show current hostname
-  * Alternative: `hostnamectl set-hostname your-new-hostname` set hostname equal to your-new-hostname
-  * Reboot is required to see new hostname applied
+  * `hostname` -> show current hostname.
+  * Alternative: `hostnamectl set-hostname your-new-hostname` -> set hostname equal to your-new-hostname.
+  * Reboot is required to see new hostname applied.
 
 * In `/etc/hosts` is configured a name resolution that take precedence of DNS - configurable in `/etc/nsswitch.conf`
 
-  * It contains static DNS entry
+  * It contains static DNS entry.
 
-  * It is possible add hostname to row for 127.0.0.1 resolution, or insert a static IP configured on principal interface equal to hostname
+  * It is possible add hostname to row for 127.0.0.1 resolution, or insert a static IP configured on principal interface equal to hostname.
 
-  * Alias can be added following this format: IP FQDN ALIAS.
+  * Alias can be added following this format: **IP FQDN ALIAS**.
 
-*  In `/etc/resolv.conf` there are configured DNS servers entry
+*  In `/etc/resolv.conf` there are configured DNS servers entry.
 
-* It is possible to insert more than one *nameserver* as backup (primary and secondary)
+* It is possible to insert more than one *nameserver* as backup (primary and secondary).
 
 * Use: `dig www.pluralsight.com` -> to resolve the site and see the IP address.
 
@@ -67,8 +67,8 @@ Network Manager
 
 Network
 
-* `systemctl status network` -> to check network configuration status
-* `systemctl restart network` -> to reload network configuration
+* `systemctl status network` -> to check network configuration status.
+* `systemctl restart network` -> to reload network configuration.
 
 References:
 
@@ -211,12 +211,12 @@ References:
 
 ## Start, stop, and check the status of network services
 
-* Network services are controlled as other daemon with `systemctl` command
+* Network services are controlled as other daemon with `systemctl` command.
   * `systemctl status servicename`
 
-* With `netstat` it is possible to list internet port opened by a process
+* With `netstat` it is possible to list internet port opened by a process.
   * `yum -y install net-tools`
-  * `netstat -tln` - Show TCP port opened by processes
+  * `netstat -tln` - Show TCP port opened by processes.
 
 
 ## Statically route IP traffic
@@ -250,40 +250,40 @@ References:
 ## Synchronize time using other network peers
 
 * In time synchronization the concept of Stratum define the accuracy of server time.
-* A server with Stratum 0 it is the most reliable
-* A server synchronized with a Stratum 0 become Stratum 1
-* Stratum 10 is reserved for local clock. This means that it is not utilizable
-* The upper limit for Stratum is 15
-* Stratum 16 is used to indicate that a device is unsynchronized
-* Remember that time synchronization between servers is a slowly process
+* A server with Stratum 0 is the most reliable.
+* A server synchronized with a Stratum 0 become Stratum 1.
+* Stratum 10 is reserved for local clock. This means that it is not utilizable.
+* The upper limit for Stratum is 15.
+* Stratum 16 is used to indicate that a device is unsynchronized.
+* Remember that time synchronization between servers is a slowly process.
 
 * `hwclock` -> Show hardware clock - BIOS. Can be synched with system time.
-    * `hwclock --systohc`  -> sync system time to the hardware time
-    *  `hwclock --hctosys` -> sync hardware time to the system time
-* `timedatectl set-time "2016-10-30 13:30:22"` - Part of Systemd ecosystem. Set the time
+    * `hwclock --systohc`  -> sync system time to the hardware time.
+    *  `hwclock --hctosys` -> sync hardware time to the system time.
+* `timedatectl set-time "2016-10-30 13:30:22"` - Part of Systemd ecosystem. Set the time.
 * `timedatectl set-timezone Europe/Sofia` - Change the timezone.
 
 ***CHRONYD:***
 
-* Default mechanism to synchronize time in CentOS 7
+* Default mechanism to synchronize time in CentOS 7.
 * Chrony is systemd deamon. Start it with: `systemctl start chronyd`
 * Configuration file `/etc/chrony.conf`
-    * `server` parameters are servers that are used as source of synchronization
-*  Use the command `chronyc` to interact with the chronyd
-    * `chronyc sources` -> contact server and show them status
-    * `chronyc tracking` -> show current status of system clock
-    * `chronyc ntpdata` -> show more infor for every server
+    * `server` parameters are servers that are used as source of synchronization.
+*  Use the command `chronyc` to interact with the chronyd.
+    * `chronyc sources` -> contact server and show them status.
+    * `chronyc tracking` -> show current status of system clock.
+    * `chronyc ntpdata` -> show more info for every server.
 
 * **NOTE**: if some of the commands above doesn't work please refer to this bug [https://bugzilla.redhat.com/show_bug.cgi?id=1574418](https://bugzilla.redhat.com/show_bug.cgi?id=1574418)
   * Simple solution: `setenforce 0`
-  * Package `selinux-policy-3.13.1-229` should resolve the problem
+  * Package `selinux-policy-3.13.1-229` should resolve the problem.
 
 **NTP:**
 
 * The old method of synchronization. To enable it Chronyd must be disabled. It's also service.
 * Configuration file `/etc/ntp.conf`
-    * `server` parameters are servers that are used as source of synchronization
-* `ntpq -p` check current status of synchronization
+    * `server` parameters are servers that are used as source of synchronization.
+* `ntpq -p` check current status of synchronization.
 
 Both NTP and CHRONYD are using port ***123***. CHRONYD is working also on port **323**.
 

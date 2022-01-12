@@ -275,10 +275,16 @@ Refer to `sudo` configuration
     3. ***session*** - Perform something only for the user’s current session (such as displaying a message of the day).
     4. ***password*** - Change a user’s password or other credentials.
 
+        When a hyphen appears before the type, PAM will not record to the system log if the
+        module cannot be loaded because it could not be found in the system.
+
   * **Control argument** - This setting controls what PAM does after success or failure of its action for the current line
     1. ***sufficient*** - If this rule succeeds, the authentication is successful, and PAM does not need to look at any more rules. If the rule fails, PAM proceeds to additional rules.
     2. ***requisite*** - If this rule succeeds, PAM proceeds to additional rules. If the rule fails, the authentication is unsuccessful, and PAM does not need to look at any more rules.
     3. ***required***  - If this rule succeeds, PAM proceeds to additional rules. If the rule fails, PAM proceeds to additional rules but will always return an unsuccessful authentication regardless of the end result of the additional rules.
+    4. ***include*** -  means that the lines of the given type should be read from another file.
+    5. ***optional*** - if the authentication via this module fails or succeeds, nothing happens unless this is the only module of its type defined for this service.
+    6. ***substack*** -  is similar to includes but authentication failures or successes do not cause the exit of the complete module, but only of the substack.
 
   * **Module** - The authentication module that runs for this line, determining what the line actually does.
     * PAM modules can take arguments after the module name.

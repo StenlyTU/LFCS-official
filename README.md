@@ -19,7 +19,7 @@ The notes contain instructions/commands for ***CentOS*** distribution.
 
 These notes cannot be considered as unique source of information to prepare LFCS exam, but can be used as guideline to understand which topics you must be able to manage to pass the exam.
 
-[Here](stuff/LFCS-Practice-Questions-v1.1.pdf) you can find the official practice questions for the exam.
+[Here](stuff/LFCS-Practice-Questions-v1.1.pdf) you can find the official practice questions for the exam. Passing score: **66%**
 
 ## Domains & Competencies
 
