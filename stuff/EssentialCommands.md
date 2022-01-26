@@ -663,16 +663,11 @@ References:
 * `visudo` Modify the sudo configuration
 
   * Basic configuration:
-  * ***demo*** ALL=(ALL:ALL)      ALL
-    ​           The first field indicates the username that the rule will apply to.
-  - demo ***ALL***=(ALL:ALL)      ALL
-    ​           The first "ALL" indicates that this rule applies to all hosts.
-  - demo ALL=(***ALL***:ALL)      ALL
-    ​           This "ALL" indicates that user demo can run commands as all users.
-  - demo ALL=(ALL:***ALL***)      ALL
-    ​           This "ALL" indicates that user demo can run commands as all groups.
-  - demo ALL=(ALL:ALL)      ***ALL***
-    ​           The last "ALL" indicates these rules apply to all commands.
+  * ***demo*** ALL=(ALL:ALL)      ALL -> The first field indicates the username that the rule will apply to.
+  - demo ***ALL***=(ALL:ALL)      ALL -> The first "ALL" indicates that this rule applies to all hosts.
+  - demo ALL=(***ALL***:ALL)      ALL -> This "ALL" indicates that user demo can run commands as all users.
+  - demo ALL=(ALL:***ALL***)      ALL -> This "ALL" indicates that user demo can run commands as all groups.
+  - demo ALL=(ALL:ALL)      ***ALL*** -> The last "ALL" indicates these rules apply to all commands.
 
   With this row inserted in sudo configuration, demo user can execute this command:
 

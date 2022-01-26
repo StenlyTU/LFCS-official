@@ -60,6 +60,8 @@
 
 * If more space is needed a volume group can be extended as well.
 
+* `lvmdiskscan` - can be used to view on which partitions are LVM enabled.
+
 Physical Volume
 
 * `pvcreate /dev/sdb1` -> To create a physical volume with partition sbd1.
@@ -110,7 +112,11 @@ Logical volume
   * For xfs use `xfs_growfs /lvm` to resize the filesystem. 
   * To resize ExtN use -r or `resize2fs /dev/vgname/volumename`.
 
+* `lvextend -l +100%FREE -r /dev/mapper/vgname-volumename` - It is important to include the minus (-) or plus (+) signs while resizing a logical volume. Otherwise, you’re setting a fixed size for the LV instead of resizing it.
+
 * `lvreduce -L -1G -r vgname/volumename ` -> Reduce the logical volume *volumename* of one giga and resize.
+
+* `sudo lvresize -L +5G --resizefs vgname/volumename` -> You can use resize command also. -r == --resizefs
 
 * `lvcreate -L 30M -s -n backup /dev/vgname/volumename` -> Create LVM Snapshot.
   * `mount /dev/vgname/volumename/backup /mnt -o nouuid,ro` -> Mount the backup somewhere.
@@ -208,7 +214,7 @@ Automount
 
 ***SMB protocol***
 
-* `yum -y install samba-client cifs-utils` -> it installs software need to manage CIFS/SMB protocol
+* `yum -y install samba samba-client cifs-utils` -> it installs software need to manage CIFS/SMB protocol
 
 * Samba configuration file: ` /etc/samba/smb.conf`
 
@@ -223,7 +229,7 @@ Automount
   It mounts a directory *share*, shared by server 192.168.0.10 on samba directory. User and password to authentication are provided
 
 * Permanent configuration
-  * `echo "username=smbuser" >> /media/smb/.smbconf`
+  * `echo "username=smbuser" >> /media/smb/.smbconf` # can be any file name, just change the perm.
   * `echo "password=1234pwd" >> /media/smb/.smbconf`
   * `chmod 600 /media/smb/.smbconf`
   * In `/etc/fstab` insert:
@@ -231,7 +237,7 @@ Automount
 
 ***NFS protocol***
 
-* `yum -y install nfs-utils` -> it install software to manage NFS protocol
+* `yum -y install nfs-utils` -> it install software to manage NFS protocol.
   1. `systemctl enable nfs-server --now`
   2. Shared files are configure in `/etc/exports` like this:
       ```bash
@@ -268,6 +274,7 @@ Automount
   * `swapoff /dev/sdb3` -> Disable the swap.
   * `swapon -p 10 /dev/sd3` -> Starts the swap and give it priority of 10. The higher priority is used first. Can be configured directly in */etc/fstab* replacing *defaults* with *sw,pri=10*
 
+- You can also use file as swap space. The commands are the same.
 
 ## Create and manage RAID devices
 
@@ -382,6 +389,7 @@ Automount NFS directory
 * If an ACL is applied, when `ls -la` is executed an + is inserted after other permissions. The "." in the end shows that ACL is supported.
 
 * `setfacl -x u:test:w test` -> remove ACL.
+* `setfacl -x u:test: test` -> Or try this way.
 
 * `setfacl -b file` -> removes all ACL.
 
@@ -396,6 +404,7 @@ Automount NFS directory
 * `chattr +a file` -> The file can only be opened in append mode for writing.
 * `chattr +A file` -> When a file with this attribute set is open, its atime(last time the file was accessed/opened) record is not changed.
 * `lsattr file` -> shows file's extended attributes.
+* To find more attribute have a look here: `man chattr`
 
 
 ## Setup user and group disk quotas for filesystems

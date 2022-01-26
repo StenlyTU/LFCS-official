@@ -228,7 +228,7 @@
 
 * `man limits.conf` - for manual.
 
-* Limits will be enforced in next opened session
+* Limits will be enforced in next opened session.
 
 * `ulimit -a` -> List all limits for the current user.
 
@@ -253,10 +253,13 @@ Refer to `sudo` configuration
 * Use ldd to see if command use PAM libraries
   * `ldd /usr/bin/passwd | grep pam`
 
-* Each command that will use PAM will have an entry in `/etc/pam.d` with its PAM configuration
-* A good example of PAM configuration is showed in pam_tally2 module man page
+* The main configuration file for PAM is `/etc/pam.conf` and the `/etc/pam.d/` directory contains the PAM configuration files for each PAM-aware application/services. PAM will ignore the file if the directory exists.
+
+* Each command that will use PAM will have an entry in `/etc/pam.d` with its PAM configuration.
+
+* A good example of PAM configuration is showed in pam_tally2 module man page.
   * pam_tally2: The login counter (tallying) module
-  * At the end of man page there is an example to configure login to lock the account after 4 failed logins
+  * At the end of man page there is an example to configure login to lock the account after 4 failed logins.
   * `man pam_tally2`
 
 * Example from `/etc/pam.d/chsh`
@@ -269,7 +272,7 @@ Refer to `sudo` configuration
   session    include      system-auth
   ```
   Each configuration line has three fields: a function type, control argument and module.
-  * **Function type** - The function that a user application asks PAM to perform. Here, it’s auth, the task of authenticating the user
+  * **Function type** - The function that a user application asks PAM to perform. Here, it’s auth, the task of authenticating the user.
     1. ***auth*** - Authenticate a user (see if the user is who they say they are).
     2. ***account*** - Check user account status (whether the user is authorized to do something, for example).
     3. ***session*** - Perform something only for the user’s current session (such as displaying a message of the day).
@@ -279,11 +282,11 @@ Refer to `sudo` configuration
         module cannot be loaded because it could not be found in the system.
 
   * **Control argument** - This setting controls what PAM does after success or failure of its action for the current line
-    1. ***sufficient*** - If this rule succeeds, the authentication is successful, and PAM does not need to look at any more rules. If the rule fails, PAM proceeds to additional rules.
-    2. ***requisite*** - If this rule succeeds, PAM proceeds to additional rules. If the rule fails, the authentication is unsuccessful, and PAM does not need to look at any more rules.
-    3. ***required***  - If this rule succeeds, PAM proceeds to additional rules. If the rule fails, PAM proceeds to additional rules but will always return an unsuccessful authentication regardless of the end result of the additional rules.
-    4. ***include*** -  means that the lines of the given type should be read from another file.
-    5. ***optional*** - if the authentication via this module fails or succeeds, nothing happens unless this is the only module of its type defined for this service.
+    1. ***requisite*** - If this rule succeeds, PAM proceeds to additional rules. If the rule fails, the authentication is unsuccessful, and PAM does not need to look at any more rules.
+    2. ***required***  - If this rule succeeds, PAM proceeds to additional rules. If the rule fails, PAM proceeds to additional rules but will always return an unsuccessful authentication regardless of the end result of the additional rules.
+    3. ***sufficient*** - If this rule succeeds, the authentication is successful, and PAM does not need to look at any more rules. If the rule fails, PAM proceeds to additional rules(failure of this module is ignored).
+    4. ***optional*** - if the authentication via this module fails or succeeds, nothing happens unless this is the only module of its type defined for this service.
+    5. ***include*** -  means that the lines of the given type should be read from another file.
     6. ***substack*** -  is similar to includes but authentication failures or successes do not cause the exit of the complete module, but only of the substack.
 
   * **Module** - The authentication module that runs for this line, determining what the line actually does.
@@ -291,7 +294,7 @@ Refer to `sudo` configuration
     ```bash
     auth sufficient pam_unix.so nullok
     ```
-  * The `@include` syntax loads an entire configuration file, but you can also use acontrol argument to load only the configuration for a particular function. 
+  * The `@include` syntax loads an entire configuration file, but you can also use a control argument to load only the configuration for a particular function. 
   * For more info check `man pam`
 
 * In `/etc/security` you can find config files related to PAM:

@@ -87,7 +87,8 @@ References:
 
 ## Maintain a DNS zone
 
-- `/var/named/test.com.zone` contents
+- `/var/named/test.com.zone` contents:
+  * **NOTE**: Please change the group owner of the file: `chgrp named /var/named/test.com.zone`
 
   ```bash
   $TTL 3H
@@ -104,14 +105,23 @@ References:
   email   IN A    192.168.0.29
   web     IN A    192.168.0.29
   www.web IN CNAME web
+
+  ;generate one hundred entries host1 thru host100
+  $GENERATE 1-100 host$.example.com. IN A 10.20.45.$
   ```
+  - Serial: The serial number is one of the more important things in the SOA record. It should increment every time you make a change to your zone file. One of the ways to ensure your serial number is updated properly is to use the following format, YYYYMMDDXX where XX is a two-digit revision number.
+  - Refresh: How often to check for new serial from primary.
+  - Retry: How often to retry if no response from primary.
+  - Expire: How long to keep returning authoritative answers when we cannot reach the primary server.
+  - Negative TTL: How long to cache an NX domain answer. Is the time your caching nameserver will hold onto a "this record does not exist" answer.
+  - To set the default TTL use the $TTL line at the beginning of the line.
 
   - Line 2: This is where the SOA (start of authority) control record begins.
     - `@` means that zone name will be extracted from the corresponding entry in `/etc/named.conf` (in this example test.com.)
     - `dns.test.com.` is the name of authoritative server for the zone
     - `root.test.com.` an e-mail address of the person in charge of this name server. Because the `@` sign already has a special meaning, `.` is entered here instead. For `root@test.com` the entry must be `root.test.com.`
-  - Line 8: The `IN NS` specifies the name server responsible for this domain (authoritative server)
-  - Line 9: The `MX` record specifies the mail server that accepts, processes, and forwards e-mails for this domain
+  - Line 8: The `IN NS` specifies the name server responsible for this domain (authoritative server).
+  - Line 9: The `MX` record specifies the mail server that accepts, processes, and forwards e-mails for this domain.
   - Last lines: These are the actual address records where one or more IP addresses are assigned to hostnames.
     - CNAMES maps a name on another name
 
