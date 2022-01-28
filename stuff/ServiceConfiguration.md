@@ -326,9 +326,9 @@ References:
 ## Configure an HTTP server
 
 * Used server: Apache HTTP Server
-* `yum -y install httpd` will install server
-* `systemctl start httpd` will start server
-* `/etc/httpd/conf/httpd.conf` is the principal configuration file
+* `yum -y install httpd` -> Will install server.
+* `systemctl start httpd` -> Will start server.
+* `/etc/httpd/conf/httpd.conf` -> is the principal configuration file.
   * `ServerName localhost` contains the local server name. 
     * **NOTE**: it must correspond to an IP. Simple solution is to modify /etc/hosts to insert a name-IP mapping
 
@@ -348,17 +348,34 @@ References:
   ```
   * *DocumentRoot*, will contain site's files(index.html). Normally it will be: `/var/www/html`
   * The file structure can be copied from `/usr/share/doc/httpd-2.4.6/httpd-vhosts.conf`
-      * **NOTE**: The version depends by server version installed
+      * **NOTE**: The version depends by server version installed.
 
-* `httpd -t ` -> **Runs syntax check for config files**
+* `httpd -t ` -> **Runs syntax check for config files**.
 
 * Allow the service to the firewall:
   ```
   $ firewall-cmd –add-service=http –permanent
   $ firewall-cmd –add-service=https –permanent
   $ systemctl restart firewalld
-
   ```
+
+* The default Document Root and CGI root have the proper SELinux context. If you serve files from outside those locations, you need to use the chcon command and set context to: *httpd_sys_content_t*
+  - As a security measure, SELinux will not allow Apache to write logs to a directory other than the
+default /var/log/httpd. you need to add this context: *httpd_log_t*
+
+* To create Password-Protected Subdirectory use the following:
+  - `/var/www/html/secure` - Create the new secure folder.
+  - Create the following into `/etc/httpd/conf.d/secure-dir.conf`
+    ```bash
+      <Location /secure/>
+        AuthType Basic
+        AuthName "Restricted Area"
+        AuthUserFile secure.users
+        Require valid-user
+      </Location>
+    ```
+  - `htpasswd -c /etc/httpd/secure.users <username>`
+  - `systemctl restart httpd`
 
 
 ## Configure HTTP server log files
@@ -371,15 +388,15 @@ References:
   CustomLog /var/log/httpd/example.com_access_log combined
   ```
 
-  * This will generate store Error log in /var/log/httpd/example.com_error_log
+  * This will generate and store Error log in /var/log/httpd/example.com_error_log
 
   * Plus will generate a log with a custom format in /var/log/httpd/example.com_access_log
 
 * Normally log are stored in /var/log/httpd
 
-* `yum -y install httpd-manual` will install httpd manuals
+* `yum -y install httpd-manual` -> Will install httpd manuals.
   * Manuals are in http format
-  * In `/usr/share/httpd/manual/vhosts` are stored manual for vhost
+  * In `/usr/share/httpd/manual/vhosts` -> are stored manual for vhost.
 
 
 ## Configure a database server
