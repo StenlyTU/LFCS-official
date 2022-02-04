@@ -282,8 +282,11 @@ References:
 
 * The old method of synchronization. To enable it Chronyd must be disabled. It's also service.
 * Configuration file `/etc/ntp.conf`
-    * `server` parameters are servers that are used as source of synchronization.
+    * `server` - Parameters are servers that are used as source of synchronization.
+    * `logfile /var/log/ntp.log` - Specify log file.
 * `ntpq -p` check current status of synchronization.
+* `ntpdate -q 2.bg.pool.ntp.org` -> Set the local date and time from specific server.
+* `ntpstat` -> Show NTP synchonization status.
 
 Both NTP and CHRONYD are using port ***123***. CHRONYD is working also on port **323**.
 
