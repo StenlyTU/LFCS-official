@@ -111,13 +111,26 @@ References:
 
 * `firewall-cmd` is the command to manage firewalld
 
+- This is table which chain is impemented in which tables:
+
+  |Tables↓/Chains→|PREROUTING|INPUT|FORWARD|OUTPUT|POSTROUTING|
+  |:-:|:-:|:-:|:-:|:-:|---|
+  |routing        |          |     |       |  ✓   |   |
+  |  raw          |  ✓	     |     |       |  ✓   | 	  |
+  |  mangle       | ✓        |  ✓  |  ✓    |  ✓   | ✓    |
+  | nat (DNAT)    |   ✓      |     |     |    ✓   |      |
+  |  filter       |          |  ✓  |  ✓  |  ✓    |      |
+  | security      |          |   ✓       |  ✓   |   ✓    |      |
+  |    nat (SNAT)           |         |     ✓      |     |       |  ✓    |
+
+
 ***Firewalld:***
 
 * firewalld is enabled by default in CentOS and it's idea is to simplify the work with iptables.
 * It works with zone, *public* is default zone
 * The *zone* is applied to an interface
   * The idea is that we can have safe zone, e.g. bound to an internal interface, and unsafe zone, e.g. bound to external interfaces internet facing
-  * `firewall-cmd --get-defaul-zone || --get-active-zones || --get-zones || --set-default-zone`
+  * `firewall-cmd --get-default-zone || --get-active-zones || --get-zones || --set-default-zone`
 
 * `firewall-cmd --list-all` show current configuration
   * services -> service that are allowed to use interface
