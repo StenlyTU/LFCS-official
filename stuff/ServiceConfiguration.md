@@ -401,13 +401,22 @@ default /var/log/httpd. you need to add this context: *httpd_log_t*
 
 ## Configure a database server
 
-* Used database: MariaDB
-* `yum -y install mariadb mariadb-server` will install database
-* `systemctl start mariadb` will start database
-* `mysql -u root -p` will connect to database as root database user
-  * Default password is blank
-* Run the following bash script: `mysql_secure_installation` to improve MariaDB security
-  * It will permit to configure root password
+- `yum -y install mariadb mariadb-server` -> Will install MariaDB database.
+- `systemctl start mariadb` -> Will start database.
+- `mysqladmin -u root -p version` -> Verify theMariaDBserver is ready.
+- The default configuration options are read from the following files in the given order: ***/etc/mysql/my.cnf***, ***/etc/my.cnf***, and ***~/.my.cnf***. 
+- `mysql -u root -p` -> Will connect to database as root database user.
+  - Default password is blank
+- Run the following bash script: `mysql_secure_installation` to improve MariaDB security.
+  - It will permit to configure root password.
+  ```bash
+  CREATE USER 'student'@'%' IDENTIFIED BY 'password'; # Create user "student" with password "password"
+  SELECT USER, HOST FROM mysql.user; # Verify the user was created.
+  GRANT ALL PRIVILEGES ON test.* TO'student'@'%'; # Grant the new user all priviligies for test db.
+  CREATE TABLE Courses (Courseno INT NOT NULL ,Title VARCHAR(100)NOT NULL,Description VARCHAR(200),PRIMARY KEY( Courseno)); # Create table.
+  INSERT INTO Courses VALUES (1,'Rocket Design','Acme Rocket Basics'); # Insert into it
+  SELECT * FROM Courses; # And see it.
+  ```
 
 
 ## Restrict access to a web page
