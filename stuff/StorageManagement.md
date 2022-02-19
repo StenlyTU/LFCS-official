@@ -242,6 +242,7 @@ Automount
   2. Shared files are configure in `/etc/exports` like this:
       ```bash
       /exports_nfs/docs 192.168.233.0/24(ro,no_subtree_check)
+      # If no_root_squash option is used, remote root users are able to change any file on the shared file system
       ```
   3. Run the following: `exportfs -rv`
 

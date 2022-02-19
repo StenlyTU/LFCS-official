@@ -242,6 +242,8 @@ The default bootloader in Centos7 is GRUB2.
 
 * `kill -l` - List all available signal and corresponding number.
 
+* `man 7 signal` - Explains every signal. No need to know them by heart!
+
 References:
 
 * [https://superuser.com/questions/117913/ps-aux-output-meaning](https://superuser.com/questions/117913/ps-aux-output-meaning)
@@ -452,6 +454,8 @@ References:
 
 * `modprobe -r cdrom` - unload module cdrom.
 
+* The modules are located in `/lib/modules/$(uname -r)/kernel/drivers` folder.
+
 * In /proc/sys are contained kernel tunables, parameters that are used to customize the behavior of system.
 
 * Example
@@ -533,6 +537,8 @@ References:
 * `systemctl list-dependencies sshd.service` -> Get dependencies of the service.
 
 * `systemctl cat sshd` -> Display sshd unit file that systemd has loaded into its system.
+
+* `systemctl edit --full sshd` -> Will open editor to edit service file.
 
 * `systemctl show sshd.service` -> This will display a list of properties that are set for the specified unit.
 
