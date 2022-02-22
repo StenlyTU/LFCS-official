@@ -111,6 +111,7 @@ Logical volume
   * `-r`  is used to resize file system.
   * For xfs use `xfs_growfs /lvm` to resize the filesystem. 
   * To resize ExtN use -r or `resize2fs /dev/vgname/volumename`.
+  * The size of xfs filesystem cannot be reduced!
 
 * `lvextend -l +100%FREE -r /dev/mapper/vgname-volumename` - It is important to include the minus (-) or plus (+) signs while resizing a logical volume. Otherwise, you’re setting a fixed size for the LV instead of resizing it.
 
@@ -260,6 +261,12 @@ Automount
     * `192.168.0.10:/srv/nfs /media/nfs nfs defaults 0 0`
   * To user NFSv3 insert:
     * `192.168.0.10:/srv/nfs /media/nfs nfs defaults,vers=3 0 0`
+
+  Example: NFS create nfs share and give it ro insecure access to network xx.xx.xx.xx & give rw secure access to example.com
+    - `/nfs/share xx.xx.xx.xx(ro,insecure) example.com(rw,secure)`
+
+  For more info: `man exports`
+
 * **Note** Use Samba in a mixed environment and NFS whenever cross-platform compatibility is not necessary.
 
 
@@ -470,5 +477,6 @@ Automount NFS directory
 * For ***xfs*** use the following command. A lot of more options. Used in Enterprises:
   - `mkfs.xfs -b size=1k -l size=10m /dev/sdb3`
   - `xfs_db -x /dev/sdb3` -> Open interactive menu.
+  - `xfs_admin -L STEN_XFS_ww /dev/sten/mirrored` -> Change label. xfs_admin uses the xfs_db(8) command to modify various parameters of a filesystem. Nice tool!
 
 [Back to top of the page: ⬆️](https://github.com/StenlyTU/LFCS-official/blob/main/stuff/StorageManagement.md#storage-management)
