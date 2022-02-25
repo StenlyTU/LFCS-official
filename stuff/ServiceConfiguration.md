@@ -354,10 +354,19 @@ References:
 
 * Allow the service to the firewall:
   ```
-  $ firewall-cmd –add-service=http –permanent
-  $ firewall-cmd –add-service=https –permanent
+  $ firewall-cmd --add-service=http --permanent
+  $ firewall-cmd --add-service=https --permanent
   $ systemctl restart firewalld
   ```
+
+* To enable HTTPS check the following:
+  - https://www.linode.com/docs/guides/create-a-self-signed-tls-certificate/
+  - Just add SElinux context to the certs location: `semanage fcontext -at httpd_sys_content_t "/root/certs(/.*)?"`
+  - If you are going to use different ports(!80 & 443)
+    - You need 1st to change the http port into the config file `Listen 567` and `Listen 321`.
+    - 2nd add them to SELinux `semanage port --add -t http_port_t -p tcp 321`.
+  - https://www.linode.com/docs/guides/ssl-apache2-centos/
+  - `httpd -S` -> To see what Apache understand on your ports and VirtualHosts binding
 
 * The default Document Root and CGI root have the proper SELinux context. If you serve files from outside those locations, you need to use the chcon command and set context to: *httpd_sys_content_t*
   - As a security measure, SELinux will not allow Apache to write logs to a directory other than the
