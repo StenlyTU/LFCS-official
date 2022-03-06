@@ -356,11 +356,17 @@ References:
   ```
   $ firewall-cmd --add-service=http --permanent
   $ firewall-cmd --add-service=https --permanent
-  $ systemctl restart firewalld
+  $ firewall-cmd --reload
   ```
 
 * To enable HTTPS check the following:
   - https://www.linode.com/docs/guides/create-a-self-signed-tls-certificate/
+    - In cases when you need to generate self-signed certificate:
+      - `openssl genrsa -aes128 2048 > server.key` -> Generate a private key
+      - `openssl req -new -key server.key -out server.csr` -> Generate a CSR.
+      - `openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt` -> Generate a self-signed certificate.
+      - `openssl rsa -in server.key -out server.key.unlocked` ->  Keeping the key encrypted is a good idea, but it makes it difficult to restart the server. There are some ways around this, but most people just remove the encryption
+
   - Just add SElinux context to the certs location: `semanage fcontext -at httpd_sys_content_t "/root/certs(/.*)?"`
   - If you are going to use different ports(!80 & 443)
     - You need 1st to change the http port into the config file `Listen 567` and `Listen 321`.
@@ -514,6 +520,9 @@ default /var/log/httpd. you need to add this context: *httpd_log_t*
 
 * `docker commit <container_name>` -> Create a new image using based on the content of current running container. E.g It will contain software that was installed in container
 
+* `docker run -it --memory=300m --cpus=".5" --name dev nginx` -> Create container with specific name and give it 300MB memory and half CPU.
+
+* `docker run -it --rm -d -p 8080:80 --security-opt label=disable --name web -v /tmp/html_dir/:/usr/share/nginx/html/ nginx` -> Create container and mount */tmp/osboxes/html* to */var/www/html* and disable SELinux(from: `man docker-run`)
 
 ## Manage and configure Virtual Machines
 
