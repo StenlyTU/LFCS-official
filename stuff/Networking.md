@@ -225,11 +225,18 @@ References:
 ## Start, stop, and check the status of network services
 
 * Network services are controlled as other daemon with `systemctl` command.
-  * `systemctl status servicename`
+  * `systemctl status servicename.type`
+  * Disable/Enable on startup: `systemctl disable/enable servicename.type`
+
+* The `ss` command:
+  * Checking network services: `sudo ss -ltunp`: -l = listening, -t = TCP connections, -u = UDP connections, -n = Numeric values, -p = Processes (Require Root). Quick way to memorize: `-tunlp`
+
+* Checking the Network service after the `ss` command:
+  * `ps pid` \ `sudo lsof -p pid`
 
 * With `netstat` it is possible to list internet port opened by a process.
   * `yum -y install net-tools`
-  * `netstat -tln` - Show TCP port opened by processes.
+  * `netstat -tunlp` - Show TCP port opened by processes.
 
 
 ## Statically route IP traffic
