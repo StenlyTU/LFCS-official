@@ -236,7 +236,7 @@ References:
 
 * With `netstat` it is possible to list internet port opened by a process.
   * `yum -y install net-tools`
-  * `netstat -tunlp` - Show TCP port opened by processes.
+  * `netstat -tunlp` - Show TCP & UDP ports opened by processes.
 
 
 ## Statically route IP traffic
